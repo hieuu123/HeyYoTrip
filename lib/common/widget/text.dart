@@ -99,3 +99,29 @@ class LinkText extends StatelessWidget {
     );
   }
 }
+
+class LineThroughText extends StatelessWidget {
+  final String text;
+  final Color color;
+  final double fontsize;
+  // final String fontweight;
+
+  const LineThroughText(
+      {required this.text,
+      this.color = const Color(0xFF666666),
+      this.fontsize = 14,
+      super.key});
+
+  @override   
+  Widget build (BuildContext context) {
+    return Text(
+      '$text',
+      style: TextStyle(
+        color: color,
+        fontSize: fontsize,
+        fontWeight: FontWeight.w400,
+        decoration: TextDecoration.lineThrough
+      ),
+    );
+  }
+}

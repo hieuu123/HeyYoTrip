@@ -118,7 +118,7 @@ class HeaderNav extends StatelessWidget {
                     text: 'Hotels',
                     color: Colors.white,
                   ),
-                )
+                ),
               ],
             ),
             Column(

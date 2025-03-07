@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heyyo_trip/common/widget/text.dart';
 
 class PrimaryButton extends StatefulWidget {
   final String text;
@@ -7,29 +8,79 @@ class PrimaryButton extends StatefulWidget {
   final Color color;
   final bool isReady;
 
-  PrimaryButton({required this.text, this.textColor = const Color(0xFFFFFFFF), this.color = const Color(0xFF3982D1), 
-    this.isReady = false, required this.onPressed, super.key});
+  PrimaryButton(
+      {required this.text,
+      this.textColor = const Color(0xFFFFFFFF),
+      this.color = const Color(0xFF3982D1),
+      this.isReady = false,
+      required this.onPressed,
+      super.key});
 
-  @override   
+  @override
   State<PrimaryButton> createState() => PrimaryButtonState();
 }
 
 class PrimaryButtonState extends State<PrimaryButton> {
-  @override  
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: widget.onPressed, 
-      child: Text('${widget.text}', style: TextStyle(
-        color: Color(0xFFFFFFFF),
-      ),),
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.resolveWith<Color>(
-          (states) => widget.isReady ? const Color(0xFF3982D1) : const Color(0xFFCFE2FF),
+      onPressed: widget.onPressed,
+      child: Text(
+        '${widget.text}',
+        style: TextStyle(
+          color: widget.textColor,
         ),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))
-        )
       ),
+      style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (states) => widget.isReady ? widget.color : const Color(0xFFCFE2FF),
+          ),
+          shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)))),
+    );
+  }
+}
+
+class SecondaryButton extends StatefulWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final Color textColor;
+  final Color color;
+  // final bool isReady;
+
+  SecondaryButton(
+      {required this.text,
+      this.textColor = const Color(0xFFFFFFFF),
+      this.color = const Color(0xFF3982D1),
+      required this.onPressed,
+      super.key});
+
+  @override
+  State<SecondaryButton> createState() => SecondaryButtonState();
+}
+
+class SecondaryButtonState extends State<SecondaryButton> {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: widget.onPressed,
+      child: SubHeadingText(
+        text: widget.text,
+        color: widget.textColor,
+        fontsize: 16,
+      ),
+      style: ButtonStyle(
+          side: WidgetStateProperty.all(
+            BorderSide(
+              color: Color(0xFF3982D1),
+              width: 1
+            )
+          ),
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (states) => widget.color,
+          ),
+          shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)))),
     );
   }
 }
