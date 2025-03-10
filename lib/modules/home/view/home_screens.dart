@@ -83,9 +83,9 @@ class HomeScreen extends StatelessWidget {
                   PromotionList(
                     promotionData: const [
                       [
-                        "../assets/images/top-destination.png",
-                        "../assets/images/top-destination.png",
-                        "../assets/images/top-destination.png",
+                        "assets/images/top-destination.png",
+                        "assets/images/top-destination.png",
+                        "assets/images/top-destination.png",
                       ],
                     ],
                   ),

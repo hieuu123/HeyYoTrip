@@ -9,7 +9,7 @@ import 'package:heyyo_trip/common/widget/section.dart';
 
 
 final router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/login',
   routes: [
     GoRoute(
       path: '/login',

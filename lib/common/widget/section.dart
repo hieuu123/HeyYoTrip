@@ -47,30 +47,30 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
             destinations: [
               NavigationDestination(
-                icon: SvgPicture.asset('../assets/icons/home-unselected.svg'),
+                icon: SvgPicture.asset('assets/icons/home-unselected.svg'),
                 selectedIcon:
-                    SvgPicture.asset('../assets/icons/home-selected.svg'),
+                    SvgPicture.asset('assets/icons/home-selected.svg'),
                 label: 'Home',
               ),
               NavigationDestination(
                 icon: SvgPicture.asset(
-                    '../assets/icons/hot-deals-unselected.svg'),
+                    'assets/icons/hot-deals-unselected.svg'),
                 selectedIcon:
-                    SvgPicture.asset('../assets/icons/hot-deals-selected.svg'),
+                    SvgPicture.asset('assets/icons/hot-deals-selected.svg'),
                 label: 'Hot Deals',
               ),
               NavigationDestination(
                 icon:
-                    SvgPicture.asset('../assets/icons/bookings-unselected.svg'),
+                    SvgPicture.asset('assets/icons/bookings-unselected.svg'),
                 selectedIcon:
-                    SvgPicture.asset('../assets/icons/bookings-selected.svg'),
+                    SvgPicture.asset('assets/icons/bookings-selected.svg'),
                 label: 'Bookings',
               ),
               NavigationDestination(
                 icon:
-                    SvgPicture.asset('../assets/icons/account-unselected.svg'),
+                    SvgPicture.asset('assets/icons/account-unselected.svg'),
                 selectedIcon:
-                    SvgPicture.asset('../assets/icons/account-selected.svg'),
+                    SvgPicture.asset('assets/icons/account-selected.svg'),
                 label: 'Account',
               ),
             ],

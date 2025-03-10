@@ -249,7 +249,7 @@ class PlaceCard extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: Stack(alignment: Alignment.center, children: [
-                    SvgPicture.asset('../assets/icons/discount-corner.svg'),
+                    SvgPicture.asset('assets/icons/discount-corner.svg'),
                     SubHeadingText(
                       text: '-$discountPercent%',
                       color: Color(0xFFFFFFFF),
@@ -292,7 +292,7 @@ class PlaceCard extends StatelessWidget {
                       children: List.generate(star, (index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                          child: SvgPicture.asset('../assets/icons/star.svg'),
+                          child: SvgPicture.asset('assets/icons/star.svg'),
                         );
                       }),
                     ),
@@ -300,7 +300,7 @@ class PlaceCard extends StatelessWidget {
                       children: List.generate(nostar, (index) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 2.0, right: 6),
-                          child: SvgPicture.asset('../assets/icons/nostar.svg'),
+                          child: SvgPicture.asset('assets/icons/nostar.svg'),
                         );
                       }),
                     ),
@@ -452,7 +452,7 @@ class TourCard extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: Stack(alignment: Alignment.center, children: [
-                    SvgPicture.asset('../assets/icons/discount-corner.svg'),
+                    SvgPicture.asset('assets/icons/discount-corner.svg'),
                     SubHeadingText(
                       text: '-$discountPercent%',
                       color: Color(0xFFFFFFFF),
@@ -478,7 +478,7 @@ class TourCard extends StatelessWidget {
                           text: '${rate.toStringAsFixed(1)}/5',
                           color: Color(0xFF242426),
                         ),
-                        SvgPicture.asset('../assets/icons/star.svg')
+                        SvgPicture.asset('assets/icons/star.svg')
                       ],
                     ),
                   ))
@@ -555,24 +555,22 @@ class TourSection extends StatelessWidget {
             itemCount: tourData.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Expanded(
-                child: Row(
-                  children: [
-                    TourCard(
-                        image: tourData[index]['image'],
-                        date: tourData[index]['date'],
-                        length: tourData[index]['length'],
-                        title: tourData[index]['title'],
-                        rate: tourData[index]['rate'],
-                        discountPercent: tourData[index]['discountPercent'],
-                        originalPrice: tourData[index]['originalPrice'],
-                        finalPrice: tourData[index]['finalPrice']),
-                    if (index < tourData.length - 1)
-                      SizedBox(
-                        width: 10,
-                      ),
-                  ],
-                ),
+              return Row(
+                children: [
+                  TourCard(
+                      image: tourData[index]['image'],
+                      date: tourData[index]['date'],
+                      length: tourData[index]['length'],
+                      title: tourData[index]['title'],
+                      rate: tourData[index]['rate'],
+                      discountPercent: tourData[index]['discountPercent'],
+                      originalPrice: tourData[index]['originalPrice'],
+                      finalPrice: tourData[index]['finalPrice']),
+                  if (index < tourData.length - 1)
+                    SizedBox(
+                      width: 10,
+                    ),
+                ],
               );
             }),
       ),

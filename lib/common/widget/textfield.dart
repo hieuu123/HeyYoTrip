@@ -15,7 +15,7 @@ class AppTextFormField extends StatefulWidget {
       this.hintText = '',
       required this.controller,
       this.isPassword = false,
-      this.suffixIcon = '../assets/icons/blank.svg',
+      this.suffixIcon = 'assets/icons/blank.svg',
       this.validator,
       super.key});
 
@@ -47,8 +47,8 @@ class AppTextFormFieldState extends State<AppTextFormField> {
           suffixIcon: widget.isPassword
               ? IconButton(
                   icon: isPasswordVisible
-                  ? SvgPicture.asset('../assets/icons/eye-off.svg')
-                  : SvgPicture.asset('../assets/icons/eye-open.svg'),
+                  ? SvgPicture.asset('assets/icons/eye-off.svg')
+                  : SvgPicture.asset('assets/icons/eye-open.svg'),
                   onPressed: () {
                     setState(() {
                       isPasswordVisible = !isPasswordVisible;
