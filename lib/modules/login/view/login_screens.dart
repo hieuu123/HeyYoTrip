@@ -26,10 +26,10 @@ class LoginScreenState extends State<LoginScreen> {
   ValueNotifier<bool> isInputValid = ValueNotifier(false);
 
   final List<String> socials = [
-    '../assets/icons/apple.svg',
-    '../assets/icons/facebook.svg',
-    '../assets/icons/binance.svg',
-    '../assets/icons/g+.svg',
+    'assets/icons/apple.svg',
+    'assets/icons/facebook.svg',
+    'assets/icons/binance.svg',
+    'assets/icons/g+.svg',
   ];
 
   @override
@@ -70,7 +70,7 @@ class LoginScreenState extends State<LoginScreen> {
                         width: 320,
                         height: 42,
                         child: AppTextFormField(
-                          prefixIcon: '../assets/icons/person.svg',
+                          prefixIcon: 'assets/icons/person.svg',
                           controller: emailController,
                           isPassword: false,
                           hintText: 'Email or phone number',
@@ -91,7 +91,7 @@ class LoginScreenState extends State<LoginScreen> {
                           width: 320,
                           height: 42,
                           child: AppTextFormField(
-                            prefixIcon: '../assets/icons/lock.svg',
+                            prefixIcon: 'assets/icons/lock.svg',
                             controller: passwordController,
                             isPassword: true,
                             hintText: 'Enter your password',

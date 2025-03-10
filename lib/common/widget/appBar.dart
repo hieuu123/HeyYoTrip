@@ -21,7 +21,7 @@ class SignInAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
           onPressed: () {},
           icon: SvgPicture.asset(
-            '../assets/icons/back.svg',
+            'assets/icons/back.svg',
             width: 12,
             height: 12,
           )),
@@ -30,13 +30,13 @@ class SignInAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           GestureDetector(
             onTap: () {},
-            child: SvgPicture.asset('../assets/icons/logo.svg'),
+            child: SvgPicture.asset('assets/icons/logo.svg'),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: GestureDetector(
               onTap: () {},
-              child: SvgPicture.asset('../assets/icons/logo_text.svg'),
+              child: SvgPicture.asset('assets/icons/logo_text.svg'),
             ),
           )
         ],
@@ -44,7 +44,7 @@ class SignInAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
             onPressed: () => {},
-            icon: SvgPicture.asset('../assets/icons/language.svg'))
+            icon: SvgPicture.asset('assets/icons/language.svg'))
       ],
     );
   }
@@ -70,7 +70,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         title: Padding(
           padding: const EdgeInsets.only(top: 24.0),
-          child: SvgPicture.asset('../assets/icons/logo-full.svg'),
+          child: SvgPicture.asset('assets/icons/logo-full.svg'),
         ),
         actions: [
           Padding(
@@ -79,7 +79,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {},
                 icon: Badge(
                   backgroundColor: Color(0xFFDC3545),
-                  child: SvgPicture.asset('../assets/icons/bell.svg'),
+                  child: SvgPicture.asset('assets/icons/bell.svg'),
                 )),
           )
         ],
@@ -109,8 +109,8 @@ class HeaderNav extends StatelessWidget {
             Column(
               children: [
                 Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('../assets/icons/round-shape.svg'),
-                  SvgPicture.asset('../assets/icons/hotel.svg')
+                  SvgPicture.asset('assets/icons/round-shape.svg'),
+                  SvgPicture.asset('assets/icons/hotel.svg')
                 ]),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -118,14 +118,14 @@ class HeaderNav extends StatelessWidget {
                     text: 'Hotels',
                     color: Colors.white,
                   ),
-                )
+                ),
               ],
             ),
             Column(
               children: [
                 Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('../assets/icons/round-shape.svg'),
-                  SvgPicture.asset('../assets/icons/flight.svg')
+                  SvgPicture.asset('assets/icons/round-shape.svg'),
+                  SvgPicture.asset('assets/icons/flight.svg')
                 ]),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -139,8 +139,8 @@ class HeaderNav extends StatelessWidget {
             Column(
               children: [
                 Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('../assets/icons/round-shape.svg'),
-                  SvgPicture.asset('../assets/icons/f&h.svg')
+                  SvgPicture.asset('assets/icons/round-shape.svg'),
+                  SvgPicture.asset('assets/icons/f&h.svg')
                 ]),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -154,8 +154,8 @@ class HeaderNav extends StatelessWidget {
             Column(
               children: [
                 Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('../assets/icons/round-shape.svg'),
-                  SvgPicture.asset('../assets/icons/tours.svg')
+                  SvgPicture.asset('assets/icons/round-shape.svg'),
+                  SvgPicture.asset('assets/icons/tours.svg')
                 ]),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
