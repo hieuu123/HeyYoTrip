@@ -20,20 +20,5 @@ final router = GoRouter(
       builder: (context, state) => const MainScreen(),
       pageBuilder: (context, state) => const NoTransitionPage(child: MainScreen()),
     ),
-    GoRoute(
-      path: '/hot-deals',
-      builder: (context, state) => const HotDealsScreen(),
-      pageBuilder: (context, state) => const NoTransitionPage(child: HotDealsScreen()),
-    ),
-    GoRoute(
-      path: '/bookings',
-      builder: (context, state) => const BookingsScreen(),
-      pageBuilder: (context, state) => const NoTransitionPage(child: BookingsScreen()),
-    ),
-    GoRoute(
-      path: '/account',
-      builder: (context, state) => const AccountScreen(),
-      pageBuilder: (context, state) => const NoTransitionPage(child: AccountScreen()),
-    ),
   ]
 );
