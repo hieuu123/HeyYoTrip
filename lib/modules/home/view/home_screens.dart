@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/extensions/widget_extensions.dart';
 import 'package:heyyo_trip/common/widget/appbar.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
-import 'package:heyyo_trip/common/widget/section.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
-import 'package:heyyo_trip/modules/home/blocs/home_event.dart';
-import 'package:heyyo_trip/modules/home/blocs/home_state.dart';
-import 'package:heyyo_trip/modules/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/common/value/app_value.dart';
 import 'package:heyyo_trip/modules/home/widget/home_widget.dart';
 
@@ -18,9 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNavigationBar(),
-      backgroundColor: Colors.white,
-      appBar: HomeAppBar(),
+      appBar: const HomeAppBar(),
       body: Column(
         children: [
           const HeaderNav(),
@@ -29,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SubHeadingText(
@@ -71,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15.0, bottom: 16),
+                        padding: EdgeInsets.only(left: 15.0, bottom: 16),
                         child: SubHeadingText(
                           text: 'Top Destinations In Viet Nam',
                           fontsize: 18,
@@ -93,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
+                        padding: EdgeInsets.only(
                             top: 20, left: 15.0, bottom: 16),
                         child: SubHeadingText(
                           text: 'Popular Places For You',
@@ -141,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                     child: SecondaryButton(
                       text: 'See More Tours',
                       onPressed: () {},
-                      textColor: Color(0xFF3982D1),
+                      textColor: const Color(0xFF3982D1),
                       color: Colors.white,
                     ),
                   ),
@@ -181,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     travelTicket,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF333333)),
@@ -202,7 +195,7 @@ class HomeScreen extends StatelessWidget {
                     child: SecondaryButton(
                       text: 'Coin listing',
                       onPressed: () {},
-                      textColor: Color(0xFF3982D1),
+                      textColor: const Color(0xFF3982D1),
                       color: Colors.white,
                     ),
                   ),
@@ -235,5 +228,6 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+    
   }
 }

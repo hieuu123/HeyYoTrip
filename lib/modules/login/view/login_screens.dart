@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/appbar.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
@@ -58,8 +58,8 @@ class LoginScreenState extends State<LoginScreen> {
         body: Center(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 50, bottom: 20),
                 child: HeadingText(text: 'SIGN IN'),
               ),
               Form(
@@ -138,15 +138,15 @@ class LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   )),
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 16),
+              const Padding(
+                padding: EdgeInsets.only(top: 30.0, bottom: 16),
                 child: SubHeadingText(text: 'or sign in with'),
               ),
               SizedBox(
                   height: 40,
                   width: 220,
                   child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           childAspectRatio: 1,
                           crossAxisSpacing: 20),
@@ -156,16 +156,16 @@ class LoginScreenState extends State<LoginScreen> {
                             height: 40,
                             width: 40,
                             child: SvgPicture.asset(
-                              '${socials[index]}',
+                              socials[index],
                               height: 40,
                               width: 40,
                             ));
                       })),
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 30.0, bottom: 10),
                 child: LinkText(text: 'Forgot Password?'),
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BodyText(text: "Don't have an account?"),

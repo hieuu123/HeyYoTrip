@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heyyo_trip/common/widget/section.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -7,7 +6,7 @@ class AccountScreen extends StatelessWidget {
   @override  
   Widget build (BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      // bottomNavigationBar: CustomBottomNavigationBar(selectedIndex: 0, onItemTapped: onItemTapped),
       body: Center(
         child: Column(
           children: [
