@@ -20,6 +20,7 @@ class HeadingText extends StatelessWidget {
         color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.w700,
+        fontFamily: 'OpenSans'
       ),
     );
   }
@@ -45,6 +46,7 @@ class SubHeadingText extends StatelessWidget {
         color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans'
       ),
     );
   }
@@ -70,6 +72,7 @@ class BodyText extends StatelessWidget {
         color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.w400,
+        fontFamily: 'OpenSans'
       ),
     );
   }
@@ -95,6 +98,7 @@ class LinkText extends StatelessWidget {
         color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.w400,
+        fontFamily: 'OpenSans'
       ),
     );
   }
@@ -120,7 +124,8 @@ class LineThroughText extends StatelessWidget {
         color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.w400,
-        decoration: TextDecoration.lineThrough
+        decoration: TextDecoration.lineThrough,
+        fontFamily: 'OpenSans'
       ),
     );
   }
