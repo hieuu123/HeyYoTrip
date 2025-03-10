@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:heyyo_trip/common/extensions/widget_extensions.dart';
 import 'package:heyyo_trip/common/widget/appbar.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
 import 'package:heyyo_trip/common/widget/section.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
-import 'package:heyyo_trip/blocs/home/home_event.dart';
-import 'package:heyyo_trip/blocs/home/home_state.dart';
-import 'package:heyyo_trip/blocs/home/home_bloc.dart';
+import 'package:heyyo_trip/modules/home/blocs/home_event.dart';
+import 'package:heyyo_trip/modules/home/blocs/home_state.dart';
+import 'package:heyyo_trip/modules/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/common/value/app_value.dart';
+import 'package:heyyo_trip/modules/home/widget/home_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,31 +23,27 @@ class HomeScreen extends StatelessWidget {
       appBar: HomeAppBar(),
       body: Column(
         children: [
-          HeaderNav(),
+          const HeaderNav(),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20.0, left: 15, right: 15, bottom: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SubHeadingText(
-                          text: 'Popular Deals',
-                          fontsize: 18,
-                          color: Color(0xFF333333),
-                        ),
-                        SubHeadingText(
-                          text: 'See more',
-                          fontsize: 16,
-                          color: Color(0xFF3982D1),
-                        ),
-                      ],
-                    ),
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SubHeadingText(
+                        text: 'Popular Deals',
+                        fontsize: 18,
+                        color: Color(0xFF333333),
+                      ),
+                      SubHeadingText(
+                        text: 'See more',
+                        fontsize: 16,
+                        color: Color(0xFF3982D1),
+                      ),
+                    ],
+                  ).makePadding(left: 15, top: 20, right: 15, bottom: 16),
                   CategorySection(
                       categories: categories, promotionData: dealsData),
                   Padding(

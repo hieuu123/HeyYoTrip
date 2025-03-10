@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:heyyo_trip/screens/account_screen.dart';
-import 'package:heyyo_trip/screens/bookings.dart';
-import 'package:heyyo_trip/screens/hot_deals_screens.dart';
-import 'package:heyyo_trip/screens/login_screens.dart';
-import 'package:heyyo_trip/screens/home_screens.dart';
+import 'package:heyyo_trip/modules/account_screen.dart';
+import 'package:heyyo_trip/modules/bookings.dart';
+import 'package:heyyo_trip/modules/hot_deals_screens.dart';
+import 'package:heyyo_trip/modules/login/view/login_screens.dart';
+import 'package:heyyo_trip/modules/home/view/home_screens.dart';
 import 'package:heyyo_trip/common/widget/section.dart';
 
 

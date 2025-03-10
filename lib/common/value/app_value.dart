@@ -168,7 +168,7 @@ final tourData = [
     'length': '4 days 3 nights',
     'title':
         'Da Lat - Bobla Waterfall - Flower Plateau Resort - Van Thanh Flower and Vegetable....',
-    'rate': 5,
+    'rate': 5.0,
     'discountPercent': '50',
     'originalPrice': '2,990,000 VND',
     'finalPrice': '2,690,000 VND'
@@ -179,7 +179,7 @@ final tourData = [
     'length': '4 days 3 nights',
     'title':
         'Da Lat - Bobla Waterfall - Flower Plateau Resort - Van Thanh Flower and Vegetable....',
-    'rate': 5,
+    'rate': 5.0,
     'discountPercent': '50',
     'originalPrice': '2,990,000 VND',
     'finalPrice': '2,690,000 VND'
@@ -190,7 +190,7 @@ final tourData = [
     'length': '4 days 3 nights',
     'title':
         'Da Lat - Bobla Waterfall - Flower Plateau Resort - Van Thanh Flower and Vegetable....',
-    'rate': 5,
+    'rate': 5.0,
     'discountPercent': '50',
     'originalPrice': '2,990,000 VND',
     'finalPrice': '2,690,000 VND'
@@ -201,7 +201,7 @@ final tourData = [
     'length': '4 days 3 nights',
     'title':
         'Da Lat - Bobla Waterfall - Flower Plateau Resort - Van Thanh Flower and Vegetable....',
-    'rate': 5,
+    'rate': 5.0,
     'discountPercent': '50',
     'originalPrice': '2,990,000 VND',
     'finalPrice': '2,690,000 VND'
