@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heyyo_trip/common/widget/section.dart';
 
 class HotDealsScreen extends StatelessWidget {
   const HotDealsScreen({super.key});
@@ -7,7 +6,7 @@ class HotDealsScreen extends StatelessWidget {
   @override  
   Widget build (BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Center(
         child: Column(
           children: [

@@ -349,7 +349,7 @@ class PlaceSection extends StatelessWidget {
               List<Map<String, dynamic>> selectedPlaces =
                   placeData[selectedIndex];
               return SizedBox(
-                height: 425,
+                height: 440,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
@@ -383,17 +383,20 @@ class PlaceSection extends StatelessWidget {
                           },
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: SizedBox(
-                            // width: MediaQuery.of(context).size.width * 0.8,
-                            child: SecondaryButton(
-                          text:
-                              'See More (${categories[selectedIndex]}) Properties',
-                          onPressed: () {},
-                          textColor: Color(0xFF3982D1),
-                          color: Colors.white,
-                        )),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                              // width: MediaQuery.of(context).size.width * 0.8,
+                              child: SecondaryButton(
+                            text:
+                                'See More (${categories[selectedIndex]}) Properties',
+                            onPressed: () {},
+                            textColor: Color(0xFF3982D1),
+                            color: Colors.white,
+                          )),
+                        ),
                       )
                     ],
                   ),
@@ -548,7 +551,7 @@ class TourSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 385,
+      height: 405,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: ListView.builder(

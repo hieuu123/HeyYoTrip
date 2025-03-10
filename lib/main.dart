@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
-import 'package:heyyo_trip/config/theme.dart';
-import 'package:heyyo_trip/common/widget/section.dart';
+// import 'package:heyyo_trip/config/theme.dart';
+// import 'package:heyyo_trip/common/widget/section.dart';
 
 void main() {
   runApp(
@@ -16,7 +16,7 @@ void main() {
         BlocProvider(create: (context) => BottomNavBloc()),
         BlocProvider(create: (context) => CategoryBloc())
       ],
-      child: MyApp(),
+      child: const MyApp(),
     )
   );
 }

@@ -1,35 +1,24 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/modules/account_screen.dart';
 import 'package:heyyo_trip/modules/bookings.dart';
 import 'package:heyyo_trip/modules/hot_deals_screens.dart';
 import 'package:heyyo_trip/modules/login/view/login_screens.dart';
-import 'package:heyyo_trip/modules/home/view/home_screens.dart';
-import 'package:heyyo_trip/common/widget/section.dart';
+import 'package:heyyo_trip/modules/main/view/main_screen.dart';
 
 
 final router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/login',
-      builder: (context, state) => LoginScreen()
+      builder: (context, state) => const LoginScreen(),
+      pageBuilder: (context, state) => const NoTransitionPage(child: LoginScreen()),
     ),
     GoRoute(
       path: '/',
-      builder: (context, state) => HomeScreen()
-    ),
-    GoRoute(
-      path: '/hot-deals',
-      builder: (context, state) => const HotDealsScreen(),
-    ),
-    GoRoute(
-      path: '/bookings',
-      builder: (context, state) => const BookingsScreen(),
-    ),
-    GoRoute(
-      path: '/account',
-      builder: (context, state) => const AccountScreen(),
+      builder: (context, state) => const MainScreen(),
+      pageBuilder: (context, state) => const NoTransitionPage(child: MainScreen()),
     ),
   ]
 );
