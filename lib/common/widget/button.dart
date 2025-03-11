@@ -8,7 +8,7 @@ class PrimaryButton extends StatefulWidget {
   final Color color;
   final bool isReady;
 
-  PrimaryButton(
+  const PrimaryButton(
       {required this.text,
       this.textColor = const Color(0xFFFFFFFF),
       this.color = const Color(0xFF3982D1),
@@ -46,13 +46,17 @@ class SecondaryButton extends StatefulWidget {
   final VoidCallback onPressed;
   final Color textColor;
   final Color color;
+  final double vertical;
+  final double horizontal;
   // final bool isReady;
 
-  SecondaryButton(
+  const SecondaryButton(
       {required this.text,
       this.textColor = const Color(0xFFFFFFFF),
       this.color = const Color(0xFF3982D1),
       required this.onPressed,
+      this.vertical = 0,
+      this.horizontal = 0,
       super.key});
 
   @override
@@ -64,23 +68,22 @@ class SecondaryButtonState extends State<SecondaryButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: widget.onPressed,
-      child: SubHeadingText(
-        text: widget.text,
-        color: widget.textColor,
-        fontsize: 16,
-      ),
       style: ButtonStyle(
           side: WidgetStateProperty.all(
-            BorderSide(
-              color: Color(0xFF3982D1),
-              width: 1
-            )
-          ),
+              const BorderSide(color: Color(0xFF3982D1), width: 1)),
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (states) => widget.color,
           ),
           shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)))),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: widget.vertical, horizontal: widget.horizontal),
+        child: SubHeadingText(
+          text: widget.text,
+          color: widget.textColor,
+          fontsize: 16,
+        ),
+      ),
     );
   }
 }
