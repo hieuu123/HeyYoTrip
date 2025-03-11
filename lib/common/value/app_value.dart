@@ -236,3 +236,18 @@ final travelGuide = [
     "assets/images/travel-guide.png",
   ]
 ];
+
+// final accountOptions = [
+//   {'icon': 'assets/icons/profile-account.svg', 'title': 'Profile'},
+//   {'icon': 'assets/icons/points-account.svg', 'title': 'My points'},
+//   {'icon': 'assets/icons/code-account.svg', 'title': 'My promotion code'},
+//   {'icon': 'assets/icons/language-account.svg', 'title': 'Language'},
+//   {'icon': 'assets/icons/currency-account.svg', 'title': 'Curency'},
+//   {'icon': 'assets/icons/contact-account.svg', 'title': 'Contact us'},
+//   {'icon': 'assets/icons/help-account.svg', 'title': 'Help Center'},
+//   {'icon': 'assets/icons/privacy-account.svg', 'title': 'Privacy policy'},
+//   {'icon': 'assets/icons/term-account.svg', 'title': 'Term and conditions'},
+//   {'icon': 'assets/icons/about-account.svg', 'title': 'About us'},
+//   {'icon': 'assets/icons/setting-account.svg', 'title': 'Setting'},
+//   {'icon': 'assets/icons/logout-account.svg', 'title': 'Log out'},
+// ];

@@ -60,7 +60,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
         toolbarHeight: 72,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
                   begin: Alignment.centerLeft,
@@ -78,7 +78,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: IconButton(
                 onPressed: () {},
                 icon: Badge(
-                  backgroundColor: Color(0xFFDC3545),
+                  backgroundColor: const Color(0xFFDC3545),
                   child: SvgPicture.asset('assets/icons/bell.svg'),
                 )),
           )
@@ -94,7 +94,7 @@ class HeaderNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 86,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
               begin: Alignment.centerLeft,
@@ -112,8 +112,8 @@ class HeaderNav extends StatelessWidget {
                   SvgPicture.asset('assets/icons/round-shape.svg'),
                   SvgPicture.asset('assets/icons/hotel.svg')
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: SubHeadingText(
                     text: 'Hotels',
                     color: Colors.white,
@@ -127,8 +127,8 @@ class HeaderNav extends StatelessWidget {
                   SvgPicture.asset('assets/icons/round-shape.svg'),
                   SvgPicture.asset('assets/icons/flight.svg')
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: SubHeadingText(
                     text: 'Flights',
                     color: Colors.white,
@@ -142,8 +142,8 @@ class HeaderNav extends StatelessWidget {
                   SvgPicture.asset('assets/icons/round-shape.svg'),
                   SvgPicture.asset('assets/icons/f&h.svg')
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: SubHeadingText(
                     text: 'F&H Combo',
                     color: Colors.white,
@@ -157,8 +157,8 @@ class HeaderNav extends StatelessWidget {
                   SvgPicture.asset('assets/icons/round-shape.svg'),
                   SvgPicture.asset('assets/icons/tours.svg')
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: SubHeadingText(
                     text: 'Tours',
                     color: Colors.white,
