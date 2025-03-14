@@ -15,7 +15,7 @@ class HeadingText extends StatelessWidget {
   @override   
   Widget build (BuildContext context) {
     return Text(
-      '$text',
+      text,
       style: TextStyle(
         color: color,
         fontSize: fontsize,
@@ -30,22 +30,24 @@ class SubHeadingText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontsize;
+  final bool isChosen;
   // final String fontweight;
 
   const SubHeadingText(
       {required this.text,
       this.color = const Color(0xFF888888),
       this.fontsize = 14,
+      this.isChosen = true,
       super.key});
 
   @override   
   Widget build (BuildContext context) {
     return Text(
-      '$text',
+      text,
       style: TextStyle(
         color: color,
         fontSize: fontsize,
-        fontWeight: FontWeight.w600,
+        fontWeight: isChosen ? FontWeight.w600 : FontWeight.w400,
         fontFamily: 'OpenSans'
       ),
     );
@@ -56,18 +58,22 @@ class BodyText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontsize;
+  final bool? isCenter;
+
   // final String fontweight;
 
   const BodyText(
       {required this.text,
       this.color = const Color(0xFF666666),
       this.fontsize = 14,
+      this.isCenter = false,
       super.key});
 
   @override   
   Widget build (BuildContext context) {
     return Text(
-      '$text',
+      text,
+      textAlign: isCenter! ? TextAlign.center : TextAlign.left,
       style: TextStyle(
         color: color,
         fontSize: fontsize,
@@ -93,7 +99,7 @@ class LinkText extends StatelessWidget {
   @override   
   Widget build (BuildContext context) {
     return Text(
-      '$text',
+      text,
       style: TextStyle(
         color: color,
         fontSize: fontsize,
@@ -119,7 +125,7 @@ class LineThroughText extends StatelessWidget {
   @override   
   Widget build (BuildContext context) {
     return Text(
-      '$text',
+      text,
       style: TextStyle(
         color: color,
         fontSize: fontsize,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heyyo_trip/modules/account/enum/account_enum.dart';
+import 'package:go_router/go_router.dart';
 
 extension AccountOptionExtension on AccountOption {
   String get icon {
@@ -68,5 +69,36 @@ extension AccountOptionExtension on AccountOption {
 
   bool get needsDivider {
     return this == AccountOption.currency || this == AccountOption.helpCenter;
+  }
+
+  void Function()? onTap(BuildContext context) {
+    switch (this) {
+      case AccountOption.profile:
+        return () => GoRouter.of(context).push('/profile');
+      case AccountOption.points:
+        return () => GoRouter.of(context).push('/points');
+      case AccountOption.promotionCode:
+        return () => GoRouter.of(context).push('/promotion-code');
+      case AccountOption.language:
+        return () => GoRouter.of(context).push('/language');
+      case AccountOption.currency:
+        return () => GoRouter.of(context).push('/currency');
+      case AccountOption.contactUs:
+        return () => GoRouter.of(context).push('/contact-us');
+      case AccountOption.helpCenter:
+        return () => GoRouter.of(context).push('/help-center');
+      case AccountOption.privacyPolicy:
+        return () => GoRouter.of(context).push('/privacy-policy');
+      case AccountOption.terms:
+        return () => GoRouter.of(context).push('/terms');
+      case AccountOption.about:
+        return () => GoRouter.of(context).push('/about');
+      case AccountOption.settings:
+        return () => GoRouter.of(context).push('/settings');
+      case AccountOption.logout:
+        return () {
+          GoRouter.of(context).go('/login');
+        };
+    }
   }
 }

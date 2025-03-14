@@ -9,6 +9,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const AccountAppBar(),
       body: Center(
         child: Column(
@@ -28,6 +29,7 @@ class AccountScreen extends StatelessWidget {
                           icon: option.icon,
                           title: option.title,
                           color: option.color,
+                          onTap: option.onTap(context),
                         ),
                       ),
                       if (option.needsDivider)
