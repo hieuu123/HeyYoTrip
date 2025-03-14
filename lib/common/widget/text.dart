@@ -30,12 +30,14 @@ class SubHeadingText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontsize;
+  final bool isChosen;
   // final String fontweight;
 
   const SubHeadingText(
       {required this.text,
       this.color = const Color(0xFF888888),
       this.fontsize = 14,
+      this.isChosen = true,
       super.key});
 
   @override   
@@ -45,7 +47,7 @@ class SubHeadingText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: fontsize,
-        fontWeight: FontWeight.w600,
+        fontWeight: isChosen ? FontWeight.w600 : FontWeight.w400,
         fontFamily: 'OpenSans'
       ),
     );

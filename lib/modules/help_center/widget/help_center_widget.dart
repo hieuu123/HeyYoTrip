@@ -1,9 +1,11 @@
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 import 'package:heyyo_trip/modules/help_center/enum/help_center_enum.dart';
 import 'package:heyyo_trip/modules/help_center/extension/help_center_extension.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:heyyo_trip/modules/account/extension/account_extension.dart';
 
 class HelpCenterAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -22,7 +24,7 @@ class HelpCenterAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: SvgPicture.asset('icons/back2.svg')),
+          icon: SvgPicture.asset('assets/icons/back2.svg')),
       title: const HeadingText(
         text: 'Help Center',
         color: Color(0xFF0D276E),
@@ -57,7 +59,7 @@ class HelpTextField extends StatelessWidget {
             ),
             suffixIcon: Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: SvgPicture.asset('icons/search.svg'),
+              child: SvgPicture.asset('assets/icons/search.svg'),
             )),
       ),
     );
@@ -76,34 +78,34 @@ class HelpSearchSection extends StatelessWidget {
         Positioned(
             top: 0,
             left: 42,
-            child: SvgPicture.asset('icons/help-center-bg1.svg')),
+            child: SvgPicture.asset('assets/icons/help-center-bg1.svg')),
         Positioned(
             top: 10,
             right: 27,
-            child: SvgPicture.asset('icons/help-center-bg3.svg')),
+            child: SvgPicture.asset('assets/icons/help-center-bg3.svg')),
         Positioned(
             top: 4,
             left: 105,
-            child: SvgPicture.asset('icons/help-center-bg2.svg')),
+            child: SvgPicture.asset('assets/icons/help-center-bg2.svg')),
         Positioned(
           bottom: 22,
           left: 125,
-          child: SvgPicture.asset('icons/help-center-bg5.svg'),
+          child: SvgPicture.asset('assets/icons/help-center-bg5.svg'),
         ),
         Positioned(
           bottom: 15,
           left: 128,
-          child: SvgPicture.asset('icons/help-center-bg4.svg'),
+          child: SvgPicture.asset('assets/icons/help-center-bg4.svg'),
         ),
         Positioned(
           bottom: 55,
           right: 50,
-          child: SvgPicture.asset('icons/help-center-bg5.svg'),
+          child: SvgPicture.asset('assets/icons/help-center-bg5.svg'),
         ),
         Positioned(
           bottom: 48,
           right: 52,
-          child: SvgPicture.asset('icons/help-center-bg4.svg'),
+          child: SvgPicture.asset('assets/icons/help-center-bg4.svg'),
         ),
         const Center(child: HelpTextField())
       ]),
@@ -115,35 +117,39 @@ class HelpCategory extends StatelessWidget {
   final String icon1;
   final String icon2;
   final String title;
+  final HelpCategories category;
+
   const HelpCategory(
       {required this.icon1,
       required this.icon2,
       required this.title,
+      required this.category,
       super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      // width: 185,
-      // height: 110,
-      color: const Color(0xFFFAFAFA),
-      // color: Colors.red,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              SvgPicture.asset(icon1),
-              SvgPicture.asset(icon2),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 14),
-            child: BodyText(text: title),
-          )
-        ],
+    return GestureDetector(
+      onTap: () => GoRouter.of(context).push('/help-center/details/${category.name}'),
+      child: Container(
+        alignment: Alignment.center,
+        color: const Color(0xFFFAFAFA),
+        // color: Colors.red,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SvgPicture.asset(icon1),
+                SvgPicture.asset(icon2),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 14),
+              child: BodyText(text: title),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -163,13 +169,15 @@ class HelpCategorySection extends StatelessWidget {
                 mainAxisSpacing: 10,
                 childAspectRatio: 1.75),
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: HelpCategories.values.length,
             itemBuilder: (context, index) {
               var category = HelpCategories.values[index];
               return HelpCategory(
                   icon1: category.icon1,
                   icon2: category.icon2,
-                  title: category.title);
+                  title: category.title,
+                  category: category,);
             }),
       ],
     );
@@ -212,8 +220,8 @@ class HelpToggleQuestionState extends State<HelpToggleQuestion> {
                     });
                   },
                   icon: isShow
-                      ? SvgPicture.asset('icons/help-minus1.svg')
-                      : SvgPicture.asset('icons/help-plus1.svg'))
+                      ? SvgPicture.asset('assets/icons/help-minus1.svg')
+                      : SvgPicture.asset('assets/icons/help-plus1.svg'))
             ],
           ),
         ),
@@ -243,6 +251,7 @@ class HelpToggleQuestionSection extends StatelessWidget {
             // physics: const NeverScrollableScrollPhysics(),
             itemCount: FeaturedTopics.values.length,
             scrollDirection: Axis.vertical,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return HelpToggleQuestion(
                   question: FeaturedTopics.values[index].question,
@@ -302,7 +311,7 @@ class MoreHelpSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            SvgPicture.asset('icons/help-contact.svg'),
+            SvgPicture.asset('assets/icons/help-contact.svg'),
             const SizedBox(
               width: 10,
             ),
