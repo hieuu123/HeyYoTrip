@@ -4,24 +4,28 @@ class HeadingText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontsize;
+  final bool isChosen;
+  final bool? isCenter;
   // final String fontweight;
 
   const HeadingText(
       {required this.text,
       this.color = const Color(0xFF0D276E),
       this.fontsize = 20,
+      this.isChosen = true,
+      this.isCenter = false,
       super.key});
 
-  @override   
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: isCenter! ? TextAlign.center : TextAlign.left,
       style: TextStyle(
-        color: color,
-        fontSize: fontsize,
-        fontWeight: FontWeight.w700,
-        fontFamily: 'OpenSans'
-      ),
+          color: color,
+          fontSize: fontsize,
+          fontWeight: isChosen ? FontWeight.w700 : FontWeight.w400,
+          fontFamily: 'OpenSans'),
     );
   }
 }
@@ -40,16 +44,15 @@ class SubHeadingText extends StatelessWidget {
       this.isChosen = true,
       super.key});
 
-  @override   
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-        color: color,
-        fontSize: fontsize,
-        fontWeight: isChosen ? FontWeight.w600 : FontWeight.w400,
-        fontFamily: 'OpenSans'
-      ),
+          color: color,
+          fontSize: fontsize,
+          fontWeight: isChosen ? FontWeight.w600 : FontWeight.w400,
+          fontFamily: 'OpenSans'),
     );
   }
 }
@@ -69,17 +72,16 @@ class BodyText extends StatelessWidget {
       this.isCenter = false,
       super.key});
 
-  @override   
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: isCenter! ? TextAlign.center : TextAlign.left,
       style: TextStyle(
-        color: color,
-        fontSize: fontsize,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'OpenSans'
-      ),
+          color: color,
+          fontSize: fontsize,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'OpenSans'),
     );
   }
 }
@@ -96,16 +98,15 @@ class LinkText extends StatelessWidget {
       this.fontsize = 14,
       super.key});
 
-  @override   
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-        color: color,
-        fontSize: fontsize,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'OpenSans'
-      ),
+          color: color,
+          fontSize: fontsize,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'OpenSans'),
     );
   }
 }
@@ -122,17 +123,16 @@ class LineThroughText extends StatelessWidget {
       this.fontsize = 14,
       super.key});
 
-  @override   
-  Widget build (BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-        color: color,
-        fontSize: fontsize,
-        fontWeight: FontWeight.w400,
-        decoration: TextDecoration.lineThrough,
-        fontFamily: 'OpenSans'
-      ),
+          color: color,
+          fontSize: fontsize,
+          fontWeight: FontWeight.w400,
+          decoration: TextDecoration.lineThrough,
+          fontFamily: 'OpenSans'),
     );
   }
 }

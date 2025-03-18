@@ -6,6 +6,9 @@ import 'package:heyyo_trip/common/widget/button.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 import 'package:heyyo_trip/common/value/app_value.dart';
 import 'package:heyyo_trip/modules/home/widget/home_widget.dart';
+import 'package:heyyo_trip/modules/home/widget/category_section.dart';
+import 'package:heyyo_trip/modules/home/widget/place_section.dart';
+import 'package:heyyo_trip/modules/home/widget/tour_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const HomeAppBar(),
       body: Column(
         children: [
@@ -73,8 +77,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  PromotionList(
-                    promotionData: const [
+                  const PromotionList(
+                    promotionData: [
                       [
                         "assets/images/top-destination.png",
                         "assets/images/top-destination.png",
@@ -228,6 +232,5 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
-// import 'package:heyyo_trip/common/widget/textfield.dart';
 import 'package:heyyo_trip/modules/help_center/widget/help_center_widget.dart';
+import 'package:heyyo_trip/modules/help_center/widget/appbar.dart';
+import 'package:heyyo_trip/modules/help_center/widget/search_field.dart';
+import 'package:heyyo_trip/modules/help_center/widget/help_categories_section.dart';
+import 'package:heyyo_trip/modules/help_center/widget/toggle_question.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key});

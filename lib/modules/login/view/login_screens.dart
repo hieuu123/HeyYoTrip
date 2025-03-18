@@ -82,6 +82,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 !RegExp(r'^\d{10,11}$').hasMatch(value)) {
                               return 'Please enter the right format';
                             }
+                            return null;
                           },
                         ),
                       ),
