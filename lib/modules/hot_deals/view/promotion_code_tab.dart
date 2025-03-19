@@ -18,7 +18,9 @@ class Tab2 extends StatelessWidget {
           const SizedBox(height: 20),
           SearchField(),
           const CampaignSelector(),
-          const PromotionContent(),
+          const Expanded(
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical, child: PromotionContent())),
         ],
       ),
     );
