@@ -64,7 +64,7 @@ class AppTextFormFieldState extends State<AppTextFormField> {
                   ),
                 ),
           hintText: widget.hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: Color(0xFF666666),

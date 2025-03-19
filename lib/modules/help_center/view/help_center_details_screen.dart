@@ -4,6 +4,9 @@ import 'package:heyyo_trip/modules/help_center/widget/help_center_details_widget
 import 'package:heyyo_trip/modules/help_center/widget/help_center_widget.dart';
 import 'package:heyyo_trip/modules/help_center/enum/help_center_enum.dart';
 import 'package:heyyo_trip/modules/help_center/extension/help_center_extension.dart';
+import 'package:heyyo_trip/modules/help_center/widget/appbar.dart';
+import 'package:heyyo_trip/modules/help_center/widget/toggle_question.dart';
+import 'package:heyyo_trip/modules/help_center/extension/details_category.dart';
 
 class HelpCenterDetailsScreen extends StatefulWidget {
   final HelpCategories category;
