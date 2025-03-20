@@ -27,50 +27,71 @@ class EditInformationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        EditInformationField(
-          title: 'Name',
-          value: nameController.text,
-          controller: nameController,
-        ),
-        EditInformationField(
-          title: 'Email address',
-          value: emailController.text,
-          controller: emailController,
-        ),
-        EditInformationField(
-          title: 'Phone number',
-          value: phoneController.text,
-          controller: phoneController,
-          countryCode: countryCode,
-          isPhone: true,
-          onCountryChanged: onCountryChanged,
-        ),
-        EditInformationField(
-          title: 'Date of birth',
-          value: birthController.text,
-          controller: birthController,
-          isBirthday: true,
-        ),
-        EditInformationField(
-          title: 'Gender',
-          value: genderController.text,
-          controller: genderController,
-          isGender: true,
-        ),
-        EditInformationField(
-          title: 'Country',
-          value: countryController.text,
-          controller: countryController,
-          isCountry: true,
-        ),
-        EditInformationField(
-          title: 'Address',
-          value: addressController.text,
-          controller: addressController,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        children: [
+          EditInformationField(
+            title: 'Name',
+            value: nameController.text,
+            controller: nameController,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: EditInformationField(
+              title: 'Email address',
+              value: emailController.text,
+              controller: emailController,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: EditInformationField(
+              title: 'Phone number',
+              value: phoneController.text,
+              controller: phoneController,
+              countryCode: countryCode,
+              isPhone: true,
+              onCountryChanged: onCountryChanged,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: EditInformationField(
+              title: 'Date of birth',
+              value: birthController.text,
+              controller: birthController,
+              isBirthday: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: EditInformationField(
+              title: 'Gender',
+              value: genderController.text,
+              controller: genderController,
+              isGender: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: EditInformationField(
+              title: 'Country',
+              value: countryController.text,
+              controller: countryController,
+              isCountry: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: EditInformationField(
+              title: 'Address',
+              value: addressController.text,
+              controller: addressController,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
