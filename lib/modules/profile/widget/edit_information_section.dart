@@ -33,63 +33,45 @@ class EditInformationSection extends StatelessWidget {
         children: [
           EditInformationField(
             title: 'Name',
-            value: nameController.text,
             controller: nameController,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: EditInformationField(
-              title: 'Email address',
-              value: emailController.text,
-              controller: emailController,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Email address',
+            controller: emailController,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: EditInformationField(
-              title: 'Phone number',
-              value: phoneController.text,
-              controller: phoneController,
-              countryCode: countryCode,
-              isPhone: true,
-              onCountryChanged: onCountryChanged,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Phone number',
+            controller: phoneController,
+            countryCode: countryCode,
+            isPhone: true,
+            onCountryChanged: onCountryChanged,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: EditInformationField(
-              title: 'Date of birth',
-              value: birthController.text,
-              controller: birthController,
-              isBirthday: true,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Date of birth',
+            controller: birthController,
+            isBirthday: true,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: EditInformationField(
-              title: 'Gender',
-              value: genderController.text,
-              controller: genderController,
-              isGender: true,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Gender',
+            controller: genderController,
+            isGender: true,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: EditInformationField(
-              title: 'Country',
-              value: countryController.text,
-              controller: countryController,
-              isCountry: true,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Country',
+            controller: countryController,
+            isCountry: true,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: EditInformationField(
-              title: 'Address',
-              value: addressController.text,
-              controller: addressController,
-            ),
+          const SizedBox(height: 20),
+          EditInformationField(
+            title: 'Address',
+            controller: addressController,
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );
