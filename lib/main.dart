@@ -5,26 +5,26 @@ import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
+import 'package:heyyo_trip/modules/profile/blocs/profile_bloc.dart';
 // import 'package:heyyo_trip/config/theme.dart';
 // import 'package:heyyo_trip/common/widget/section.dart';
 
 void main() {
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AuthBloc()),
-        BlocProvider(create: (context) => BottomNavBloc()),
-        BlocProvider(create: (context) => CategoryBloc())
-      ],
-      child: const MyApp(),
-    )
-  );
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (context) => AuthBloc()),
+      BlocProvider(create: (context) => BottomNavBloc()),
+      BlocProvider(create: (context) => CategoryBloc()),
+      BlocProvider(create: (context) => ProfileBloc()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override   
+  @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

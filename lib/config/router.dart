@@ -10,6 +10,8 @@ import 'package:heyyo_trip/modules/hot_deals/view/special_campaign_details.dart'
 import 'package:heyyo_trip/modules/login/view/login_screens.dart';
 import 'package:heyyo_trip/modules/main/view/main_screen.dart';
 import 'package:heyyo_trip/modules/help_center/enum/help_center_enum.dart';
+import 'package:heyyo_trip/modules/profile/view/edit_profile_screen.dart';
+import 'package:heyyo_trip/modules/profile/view/profile_screen.dart';
 
 final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
@@ -54,5 +56,17 @@ final router = GoRouter(initialLocation: '/', routes: [
     builder: (context, state) => const PromotionCodeDetails(),
     pageBuilder: (context, state) =>
         const NoTransitionPage(child: PromotionCodeDetails()),
+  ),
+  GoRoute(
+    path: '/profile',
+    builder: (context, state) => const ProfileScreen(),
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: ProfileScreen()),
+  ),
+  GoRoute(
+    path: '/edit-profile',
+    builder: (context, state) => const EditProfileScreen(),
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: EditProfileScreen()),
   ),
 ]);
