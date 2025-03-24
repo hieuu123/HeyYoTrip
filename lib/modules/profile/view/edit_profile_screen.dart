@@ -16,6 +16,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _phoneController;
@@ -67,45 +68,50 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: const EditProfileAppBar(title: 'Edit profile'),
-            body: Column(
-              children: [
-                const AvatarFrame(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: EditInformationSection(
-                      nameController: _nameController,
-                      emailController: _emailController,
-                      phoneController: _phoneController,
-                      birthController: _birthController,
-                      genderController: _genderController,
-                      countryController: _countryController,
-                      addressController: _addressController,
-                      countryCode: _countryCode,
-                      onCountryChanged: (newCountry) {
-                        setState(() {
-                          _countryCode = newCountry;
-                        });
-                      },
+            body: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const AvatarFrame(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: EditInformationSection(
+                        nameController: _nameController,
+                        emailController: _emailController,
+                        phoneController: _phoneController,
+                        birthController: _birthController,
+                        genderController: _genderController,
+                        countryController: _countryController,
+                        addressController: _addressController,
+                        countryCode: _countryCode,
+                        onCountryChanged: (newCountry) {
+                          setState(() {
+                            _countryCode = newCountry;
+                          });
+                        },
+                      ),
                     ),
                   ),
-                ),
-                RowButtons(
-                  onSave: () {
-                    context.read<ProfileBloc>().add(UpdateProfile(
-                          name: _nameController.text,
-                          email: _emailController.text,
-                          phone: _phoneController.text,
-                          birth: _birthController.text,
-                          gender: _genderController.text,
-                          country: _countryController.text,
-                          address: _addressController.text,
-                          countryCode: _countryCode,
-                        ));
-                    GoRouter.of(context).pop();
-                  },
-                ),
-              ],
+                  RowButtons(
+                    onSave: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        context.read<ProfileBloc>().add(UpdateProfile(
+                              name: _nameController.text,
+                              email: _emailController.text,
+                              phone: _phoneController.text,
+                              birth: _birthController.text,
+                              gender: _genderController.text,
+                              country: _countryController.text,
+                              address: _addressController.text,
+                              countryCode: _countryCode,
+                            ));
+                        GoRouter.of(context).pop();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

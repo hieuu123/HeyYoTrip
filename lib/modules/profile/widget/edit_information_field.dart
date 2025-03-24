@@ -16,6 +16,8 @@ class EditInformationField extends StatelessWidget {
   final bool isBirthday;
   final bool isGender;
   final bool isCountry;
+  final bool isEmail;
+  final bool isRequired;
 
   final FocusNode? focusNode;
   final FocusNode? nextFocus;
@@ -33,6 +35,8 @@ class EditInformationField extends StatelessWidget {
     this.focusNode,
     this.nextFocus,
     this.textInputAction = TextInputAction.next,
+    this.isEmail = false,
+    this.isRequired = true,
     super.key,
   });
 
@@ -71,39 +75,101 @@ class EditInformationField extends StatelessWidget {
   }
 
   Widget _buildDefaultField(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      focusNode: focusNode,
-      textInputAction: textInputAction,
-      onFieldSubmitted: (_) {
-        if (nextFocus != null) {
-          FocusScope.of(context).requestFocus(nextFocus);
-        } else {
-          FocusScope.of(context).unfocus();
+    return FormField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        final text = controller.text.trim();
+
+        if (isRequired && text.isEmpty) {
+          return 'This field is required';
         }
+
+        if (isEmail) {
+          final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+          if (!emailRegex.hasMatch(text)) {
+            return 'Invalid email format';
+          }
+        }
+
+        return null;
       },
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Color(0xFFD7D7D7),
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Color(0xFFD7D7D7),
-          ),
-        ),
-      ),
-      style: const TextStyle(
-        color: Color(0xFF333333),
-        fontFamily: 'OpenSans',
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
+      builder: (formState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              controller: controller,
+              focusNode: focusNode,
+              textInputAction: textInputAction,
+              onChanged: (val) {
+                formState.didChange(val); // cập nhật lại trạng thái
+              },
+              onFieldSubmitted: (_) {
+                if (nextFocus != null) {
+                  FocusScope.of(context).requestFocus(nextFocus);
+                } else {
+                  FocusScope.of(context).unfocus();
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 12,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: formState.hasError
+                        ? Colors.red
+                        : const Color(0xFFD7D7D7),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: formState.hasError
+                        ? Colors.red
+                        : const Color(0xFFD7D7D7),
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: const BorderSide(
+                    width: 1,
+                    color: Colors.red,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: const BorderSide(
+                    width: 1,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+              style: const TextStyle(
+                color: Color(0xFF333333),
+                fontFamily: 'OpenSans',
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            if (formState.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 12),
+                child: Text(
+                  formState.errorText ?? '',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -113,64 +179,107 @@ class EditInformationField extends StatelessWidget {
       "US": "assets/images/usa-flag.png",
     };
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFD7D7D7), width: 1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Row(
-        children: [
-          DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: countryCode,
-              icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-              items: countryFlags.entries.map((entry) {
-                return DropdownMenuItem<String>(
-                  value: entry.key,
-                  child: Image.asset(entry.value, width: 32),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  onCountryChanged?.call(newValue);
-                }
-              },
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: TextFormField(
-              controller: controller,
-              focusNode: focusNode,
-              textInputAction: textInputAction,
-              onFieldSubmitted: (_) {
-                if (nextFocus != null) {
-                  FocusScope.of(context).requestFocus(nextFocus);
-                } else {
-                  FocusScope.of(context).unfocus();
-                }
-              },
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
+    return FormField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        final text = controller.text.trim();
+
+        if (text.isEmpty) {
+          return 'This field is required';
+        }
+
+        final phoneRegex = RegExp(r'^[0-9]{8,15}$');
+        if (!phoneRegex.hasMatch(text)) {
+          return 'Invalid phone number';
+        }
+
+        return null;
+      },
+      builder: (formState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:
+                      formState.hasError ? Colors.red : const Color(0xFFD7D7D7),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(4),
               ),
-              style: const TextStyle(
-                color: Color(0xFF666666),
-                fontFamily: 'OpenSans',
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+              child: Row(
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: countryCode,
+                      icon: const Icon(Icons.keyboard_arrow_down,
+                          color: Colors.grey),
+                      items: countryFlags.entries.map((entry) {
+                        return DropdownMenuItem<String>(
+                          value: entry.key,
+                          child: Image.asset(entry.value, width: 32),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          onCountryChanged?.call(newValue);
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextFormField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      textInputAction: textInputAction,
+                      onChanged: (val) => formState.didChange(val),
+                      onFieldSubmitted: (_) {
+                        if (nextFocus != null) {
+                          FocusScope.of(context).requestFocus(nextFocus);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                        }
+                      },
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
+                      ),
+                      style: const TextStyle(
+                        color: Color(0xFF666666),
+                        fontFamily: 'OpenSans',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
+            if (formState.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 12),
+                child: Text(
+                  formState.errorText ?? '',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildBirthdayField(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFFD7D7D7), width: 1),
         borderRadius: BorderRadius.circular(4),
@@ -178,28 +287,35 @@ class EditInformationField extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: TextFormField(
-              controller: controller,
-              focusNode: focusNode,
-              textInputAction: textInputAction,
-              onFieldSubmitted: (_) {
-                if (nextFocus != null) {
-                  FocusScope.of(context).requestFocus(nextFocus);
-                } else {
-                  FocusScope.of(context)
-                      .unfocus(); // Đóng bàn phím nếu không còn field nào
+            child: GestureDetector(
+              onTap: () async {
+                final selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                );
+                if (selectedDate != null) {
+                  controller.text =
+                      DateFormat('dd/MM/yyyy').format(selectedDate);
                 }
               },
-              keyboardType: TextInputType.datetime,
-              decoration: const InputDecoration(
-                hintText: 'Enter your birthday',
-                border: InputBorder.none,
-              ),
-              style: const TextStyle(
-                color: Color(0xFF333333),
-                fontFamily: 'OpenSans',
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+              child: AbsorbPointer(
+                child: TextFormField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  textInputAction: textInputAction,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your birthday',
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(
+                    color: Color(0xFF333333),
+                    fontFamily: 'OpenSans',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ),
