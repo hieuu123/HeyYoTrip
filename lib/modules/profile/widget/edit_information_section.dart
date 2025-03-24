@@ -27,6 +27,14 @@ class EditInformationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode nameFocus = FocusNode();
+    final FocusNode emailFocus = FocusNode();
+    final FocusNode phoneFocus = FocusNode();
+    final FocusNode birthFocus = FocusNode();
+    final FocusNode genderFocus = FocusNode();
+    final FocusNode countryFocus = FocusNode();
+    final FocusNode addressFocus = FocusNode();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
@@ -34,11 +42,15 @@ class EditInformationSection extends StatelessWidget {
           EditInformationField(
             title: 'Name',
             controller: nameController,
+            focusNode: nameFocus,
+            nextFocus: emailFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Email address',
             controller: emailController,
+            focusNode: emailFocus,
+            nextFocus: phoneFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
@@ -47,29 +59,39 @@ class EditInformationSection extends StatelessWidget {
             countryCode: countryCode,
             isPhone: true,
             onCountryChanged: onCountryChanged,
+            focusNode: phoneFocus,
+            nextFocus: birthFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Date of birth',
             controller: birthController,
             isBirthday: true,
+            focusNode: birthFocus,
+            nextFocus: genderFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Gender',
             controller: genderController,
             isGender: true,
+            focusNode: genderFocus,
+            nextFocus: countryFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Country',
             controller: countryController,
             isCountry: true,
+            focusNode: countryFocus,
+            nextFocus: addressFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Address',
             controller: addressController,
+            focusNode: addressFocus,
+            // nextFocus: phoneFocus,
           ),
           const SizedBox(height: 20),
         ],

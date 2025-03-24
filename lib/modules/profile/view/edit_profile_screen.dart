@@ -24,6 +24,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _countryController;
   late TextEditingController _addressController;
   late String _countryCode;
+  final FocusScopeNode _focusScopeNode = FocusScopeNode();
+
+  @override
+  void dispose() {
+    _focusScopeNode.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -43,61 +50,64 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return BlocListener<ProfileBloc, ProfileState>(
       listenWhen: (previous, current) =>
-          previous != current, // Chỉ listen khi có thay đổi state
+          previous != current,
       listener: (context, state) {
         setState(() {
-          // _nameController.text = state.name;
-          // _emailController.text = state.email;
-          // _phoneController.text = state.phone;
-          // _birthController.text = state.birth;
           _genderController.text = state.gender;
           _countryController.text = state.country;
-          // _addressController.text = state.address;
-          _countryCode = state.countryCode;
         });
       },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: const EditProfileAppBar(title: 'Edit profile'),
-        body: Column(
-          children: [
-            const AvatarFrame(),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: EditInformationSection(
-                  nameController: _nameController,
-                  emailController: _emailController,
-                  phoneController: _phoneController,
-                  birthController: _birthController,
-                  genderController: _genderController,
-                  countryController: _countryController,
-                  addressController: _addressController,
-                  countryCode: _countryCode,
-                  onCountryChanged: (newCountry) {
-                    setState(() {
-                      _countryCode = newCountry;
-                    });
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          _focusScopeNode.unfocus();
+        },
+        child: FocusScope(
+          node: _focusScopeNode,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: const EditProfileAppBar(title: 'Edit profile'),
+            body: Column(
+              children: [
+                const AvatarFrame(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: EditInformationSection(
+                      nameController: _nameController,
+                      emailController: _emailController,
+                      phoneController: _phoneController,
+                      birthController: _birthController,
+                      genderController: _genderController,
+                      countryController: _countryController,
+                      addressController: _addressController,
+                      countryCode: _countryCode,
+                      onCountryChanged: (newCountry) {
+                        setState(() {
+                          _countryCode = newCountry;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                RowButtons(
+                  onSave: () {
+                    context.read<ProfileBloc>().add(UpdateProfile(
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          phone: _phoneController.text,
+                          birth: _birthController.text,
+                          gender: _genderController.text,
+                          country: _countryController.text,
+                          address: _addressController.text,
+                          countryCode: _countryCode,
+                        ));
+                    GoRouter.of(context).pop();
                   },
                 ),
-              ),
+              ],
             ),
-            RowButtons(
-              onSave: () {
-                context.read<ProfileBloc>().add(UpdateProfile(
-                      name: _nameController.text,
-                      email: _emailController.text,
-                      phone: _phoneController.text,
-                      birth: _birthController.text,
-                      gender: _genderController.text,
-                      country: _countryController.text,
-                      address: _addressController.text,
-                      countryCode: _countryCode,
-                    ));
-                GoRouter.of(context).pop();
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
