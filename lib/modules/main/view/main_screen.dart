@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:heyyo_trip/modules/bookings/view/bookings_screen.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heyyo_trip/modules/home/view/home_screen.dart';
 // import 'package:heyyo_trip/modules/hot_deals_screen.dart';
-import 'package:heyyo_trip/modules/bookings_screen.dart';
+// import 'package:heyyo_trip/modules/bookings/view/bookings_screen.dart';
 import 'package:heyyo_trip/modules/account/view/account_screen.dart';
 // import 'package:heyyo_trip/common/widget/appBar.dart';
 import 'package:heyyo_trip/common/widget/section.dart';
