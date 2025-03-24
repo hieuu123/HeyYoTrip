@@ -61,15 +61,15 @@ class EditInformationSection extends StatelessWidget {
             isPhone: true,
             onCountryChanged: onCountryChanged,
             focusNode: phoneFocus,
-            nextFocus: birthFocus,
+            nextFocus: genderFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Date of birth',
             controller: birthController,
             isBirthday: true,
-            focusNode: birthFocus,
-            nextFocus: genderFocus,
+            // focusNode: birthFocus,
+            // nextFocus: genderFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
