@@ -51,6 +51,7 @@ class EditInformationSection extends StatelessWidget {
             controller: emailController,
             focusNode: emailFocus,
             nextFocus: phoneFocus,
+            isEmail: true
           ),
           const SizedBox(height: 20),
           EditInformationField(
