@@ -30,7 +30,7 @@ class EditInformationSection extends StatelessWidget {
     final FocusNode nameFocus = FocusNode();
     final FocusNode emailFocus = FocusNode();
     final FocusNode phoneFocus = FocusNode();
-    final FocusNode birthFocus = FocusNode();
+    // final FocusNode birthFocus = FocusNode();
     final FocusNode genderFocus = FocusNode();
     final FocusNode countryFocus = FocusNode();
     final FocusNode addressFocus = FocusNode();

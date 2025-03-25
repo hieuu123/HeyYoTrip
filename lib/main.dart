@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
+import 'package:heyyo_trip/modules/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
@@ -16,6 +17,7 @@ void main() {
       BlocProvider(create: (context) => BottomNavBloc()),
       BlocProvider(create: (context) => CategoryBloc()),
       BlocProvider(create: (context) => ProfileBloc()),
+      BlocProvider(create: (context) => BookingsBloc()),
     ],
     child: const MyApp(),
   ));
