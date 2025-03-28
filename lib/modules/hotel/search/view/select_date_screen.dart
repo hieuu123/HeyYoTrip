@@ -20,13 +20,19 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
 
   void _onDateSelected(DateTime selectedDate) {
     setState(() {
-      if (checkInDate == null ||
-          (checkInDate != null && checkOutDate != null)) {
+      if (checkInDate == null && checkOutDate == null) {
+        // Lần tap đầu tiên
         checkInDate = selectedDate;
-        checkOutDate = null;
-      } else if (selectedDate.isAfter(checkInDate!)) {
-        checkOutDate = selectedDate;
+      } else if (checkInDate != null && checkOutDate == null) {
+        // Lần tap thứ hai
+        if (selectedDate.isAfter(checkInDate!)) {
+          checkOutDate = selectedDate;
+        } else {
+          checkOutDate = checkInDate;
+          checkInDate = selectedDate;
+        }
       } else {
+        // Đã có cả checkIn và checkOut, reset và bắt đầu range mới
         checkInDate = selectedDate;
         checkOutDate = null;
       }
