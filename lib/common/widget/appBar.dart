@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 
 
@@ -106,20 +107,23 @@ class HeaderNav extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Column(
-              children: [
-                Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('assets/icons/round-shape.svg'),
-                  SvgPicture.asset('assets/icons/hotel.svg')
-                ]),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: SubHeadingText(
-                    text: 'Hotels',
-                    color: Colors.white,
+            GestureDetector(
+              onTap: () => GoRouter.of(context).push('/hotel/search'),
+              child: Column(
+                children: [
+                  Stack(alignment: Alignment.center, children: [
+                    SvgPicture.asset('assets/icons/round-shape.svg'),
+                    SvgPicture.asset('assets/icons/hotel.svg')
+                  ]),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: SubHeadingText(
+                      text: 'Hotels',
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Column(
               children: [

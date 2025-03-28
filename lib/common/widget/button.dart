@@ -49,6 +49,7 @@ class SecondaryButton extends StatefulWidget {
   final double vertical;
   final double horizontal;
   final Color borderColor;
+  final double fontsize;
   // final bool isReady;
 
   const SecondaryButton(
@@ -59,6 +60,7 @@ class SecondaryButton extends StatefulWidget {
       required this.onPressed,
       this.vertical = 0,
       this.horizontal = 0,
+      this.fontsize = 16,
       super.key});
 
   @override
@@ -84,7 +86,7 @@ class SecondaryButtonState extends State<SecondaryButton> {
         child: SubHeadingText(
           text: widget.text,
           color: widget.textColor,
-          fontsize: 16,
+          fontsize: widget.fontsize,
         ),
       ),
     );

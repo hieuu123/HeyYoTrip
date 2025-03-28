@@ -1,17 +1,15 @@
-// import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:heyyo_trip/modules/help_center/view/help_center_details_screen.dart';
-import 'package:heyyo_trip/modules/help_center/view/help_center_screen.dart';
-import 'package:heyyo_trip/modules/hot_deals/view/promotion_code_details.dart';
-import 'package:heyyo_trip/modules/hot_deals/view/special_campaign_details.dart';
-// import 'package:heyyo_trip/modules/account_screen.dart';
-// import 'package:heyyo_trip/modules/bookings_screen.dart';
-// import 'package:heyyo_trip/modules/hot_deals_screen.dart';
-import 'package:heyyo_trip/modules/login/view/login_screens.dart';
-import 'package:heyyo_trip/modules/main/view/main_screen.dart';
-import 'package:heyyo_trip/modules/help_center/enum/help_center_enum.dart';
-import 'package:heyyo_trip/modules/profile/view/edit_profile_screen.dart';
-import 'package:heyyo_trip/modules/profile/view/profile_screen.dart';
+import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_details_screen.dart';
+import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_screen.dart';
+import 'package:heyyo_trip/modules/homepage/hot_deals/view/promotion_code_details.dart';
+import 'package:heyyo_trip/modules/homepage/hot_deals/view/special_campaign_details.dart';
+import 'package:heyyo_trip/modules/homepage/login/view/login_screens.dart';
+import 'package:heyyo_trip/modules/homepage/main/view/main_screen.dart';
+import 'package:heyyo_trip/modules/homepage/help_center/enum/help_center_enum.dart';
+import 'package:heyyo_trip/modules/homepage/profile/view/edit_profile_screen.dart';
+import 'package:heyyo_trip/modules/homepage/profile/view/profile_screen.dart';
+import 'package:heyyo_trip/modules/hotel/search/view/search_screen.dart';
+import 'package:heyyo_trip/modules/hotel/search/view/select_date_screen.dart';
 
 final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
@@ -69,4 +67,23 @@ final router = GoRouter(initialLocation: '/', routes: [
     pageBuilder: (context, state) =>
         const NoTransitionPage(child: EditProfileScreen()),
   ),
+  GoRoute(
+    path: '/hotel/search',
+    builder: (context, state) => const HotelSearchScreen(),
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: HotelSearchScreen()),
+  ),
+  GoRoute(
+    path: '/hotel/search/select-date',
+    builder: (context, state) => const SelectDateScreen(),
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: SelectDateScreen()),
+  ),
+  // GoRoute(
+  //   path: '/hotel/search/select-date',
+  //   builder: (context, state) => BlocProvider.value(
+  //     value: state.extra as SearchDateBloc,
+  //     child: const SelectDateScreen(),
+  //   ),
+  // ),
 ]);

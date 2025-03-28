@@ -217,7 +217,7 @@ final popularDestination = [
   ]
 ];
 
-final travelTicket =
+const travelTicket =
     'We pride ourselves on being the leading cryptocurrency friendly accommodation booking platform. Pay for your stay anywhere in the world seamlessly using your favourite cryptocurrency.';
 
 final coinList = [
