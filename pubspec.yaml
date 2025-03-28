@@ -101,6 +101,20 @@ flutter:
           weight: 400
         # - asset: assets/fonts/BigShouldersStencil-Italic.ttf
         #   style: italic
+    - family: QuickSand
+      fonts:
+        - asset: assets/fonts/Quicksand-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Quicksand-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
+    - family: Pattaya
+      fonts:
+        - asset: assets/fonts/Pattaya-Regular.ttf
+          weight: 400
+
+    
 
   #
   # For details regarding fonts from package dependencies,

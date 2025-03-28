@@ -136,3 +136,80 @@ class LineThroughText extends StatelessWidget {
     );
   }
 }
+
+class StrokeText extends StatelessWidget {
+  final String text;
+  final String fontFamily;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final TextAlign textAlign;
+  final Color textColor;
+  final Color strokeColor;
+  final double strokeWidth;
+  final bool hasShadow;
+  final double xOffset;
+  final double yOffset;
+  final double blurRadius;
+  final bool hasStroke;
+
+  const StrokeText({
+    super.key,
+    required this.text,
+    required this.fontFamily,
+    this.fontSize = 18,
+    this.fontWeight = FontWeight.w700,
+    this.textAlign = TextAlign.left,
+    this.textColor = Colors.white,
+    this.strokeColor = const Color(0xFF3982D1),
+    this.strokeWidth = 1.5,
+    this.hasShadow = true,
+    this.xOffset = 2.0,
+    this.yOffset = 2.0,
+    this.blurRadius = 2.0,
+    this.hasStroke = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        // Stroke layer
+        hasStroke
+            ? Text(
+                text,
+                textAlign: textAlign,
+                style: TextStyle(
+                  fontFamily: fontFamily,
+                  fontSize: fontSize,
+                  fontWeight: fontWeight,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = strokeWidth + 3
+                    ..color = strokeColor,
+                ),
+              )
+            : SizedBox(),
+        // Fill + optional shadow
+        Text(
+          text,
+          textAlign: textAlign,
+          style: TextStyle(
+            fontFamily: fontFamily,
+            fontSize: fontSize,
+            fontWeight: fontWeight,
+            color: textColor,
+            shadows: hasShadow
+                ? [
+                    Shadow(
+                      offset: Offset(xOffset, yOffset),
+                      blurRadius: blurRadius,
+                      color: const Color.fromRGBO(0, 0, 0, 0.3),
+                    )
+                  ]
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+}
