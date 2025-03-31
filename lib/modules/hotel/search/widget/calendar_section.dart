@@ -108,7 +108,8 @@ class CalendarMonthView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               children: dates.map((date) {
                 final bool isCurrentMonth = date.month == month.month;
-                final bool isToday = date.day == now.day &&
+                final bool isToday = isCurrentMonth && 
+                    date.day == now.day &&
                     date.month == now.month &&
                     date.year == now.year;
                 final bool isSelected = isCurrentMonth && (
