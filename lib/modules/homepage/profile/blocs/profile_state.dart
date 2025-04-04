@@ -21,14 +21,15 @@ class ProfileState {
 
   factory ProfileState.initial() {
     return ProfileState(
-        name: 'Nguyen Trong Hieu',
-        email: 'tronghieu@gmail.com',
-        phone: '0987654321',
-        birth: '06/01/2003',
-        gender: 'Male',
-        country: 'Vietnam',
-        address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-        countryCode: 'VN');
+      name: 'Nguyen Trong Hieu',
+      email: 'tronghieu@gmail.com',
+      phone: '0987654321',
+      birth: '06/01/2003',
+      gender: 'Male',
+      country: 'Vietnam',
+      address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+      countryCode: 'VN',
+    );
   }
 
   ProfileState copyWith({

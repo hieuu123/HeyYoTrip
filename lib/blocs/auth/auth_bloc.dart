@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
+import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +18,49 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
+
+        final uid = credential.user?.uid;
+        if (uid != null) {
+          final doc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(uid)
+              .get();
+
+          if (doc.exists) {
+            final data = doc.data();
+            final fullName =
+                '${data?['lastName'] ?? ''} ${data?['firstName'] ?? ''}';
+            final email = data?['email'] ?? '';
+            final phone = data?['phone'] ?? '';
+
+            if (event.context.mounted) {
+              event.context.read<ProfileBloc>().add(UpdateProfile(
+                    name: fullName,
+                    email: email,
+                    phone: phone,
+                    birth: '06/01/2003',
+                    gender: 'Male',
+                    country: 'Vietnam',
+                    address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+                    countryCode: 'VN',
+                  ));
+            }
+          } else {
+            if (event.context.mounted) {
+              event.context.read<ProfileBloc>().add(UpdateProfile(
+                    name: 'Nguyen Trong Hieu',
+                    email: 'tronghieu@gmail.com',
+                    phone: '0987654321',
+                    birth: '06/01/2003',
+                    gender: 'Male',
+                    country: 'Vietnam',
+                    address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+                    countryCode: 'VN',
+                  ));
+            }
+          }
+        }
+
         emit(AuthSuccess('Login successful!'));
       } on FirebaseAuthException catch (e) {
         emit(AuthFailure(e.message ?? 'Login failed'));
@@ -54,6 +99,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           });
 
           print("✅ Firestore write successful for UID: $uid");
+
+          // ✅ Update ProfileBloc tại đây
+          if (event.context.mounted) {
+            event.context.read<ProfileBloc>().add(UpdateProfile(
+                  name: '${event.lastName} ${event.firstName}',
+                  email: event.email,
+                  phone: event.phone,
+                  birth: '06/01/2003',
+                  gender: 'Male',
+                  country: 'Vietnam',
+                  address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+                  countryCode: 'VN',
+                ));
+          }
 
           emit(AuthSuccess('Registration successful!'));
         } catch (e) {
