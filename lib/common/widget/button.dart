@@ -25,18 +25,16 @@ class PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: widget.onPressed,
-      child: Text(
-        '${widget.text}',
-        style: TextStyle(
-          color: widget.textColor,
-        ),
-      ),
       style: ButtonStyle(
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (states) => widget.isReady ? widget.color : const Color(0xFFCFE2FF),
           ),
           shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)))),
+      child: SubHeadingText(
+        text: widget.text,
+        color: Colors.white,
+      ),
     );
   }
 }

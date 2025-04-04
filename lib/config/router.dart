@@ -3,7 +3,8 @@ import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_details
 import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_screen.dart';
 import 'package:heyyo_trip/modules/homepage/hot_deals/view/promotion_code_details.dart';
 import 'package:heyyo_trip/modules/homepage/hot_deals/view/special_campaign_details.dart';
-import 'package:heyyo_trip/modules/homepage/login/view/login_screens.dart';
+import 'package:heyyo_trip/modules/homepage/login/view/login_screen.dart';
+import 'package:heyyo_trip/modules/homepage/login/view/signup_screen.dart';
 import 'package:heyyo_trip/modules/homepage/main/view/main_screen.dart';
 import 'package:heyyo_trip/modules/homepage/help_center/enum/help_center_enum.dart';
 import 'package:heyyo_trip/modules/homepage/profile/view/edit_profile_screen.dart';
@@ -11,7 +12,7 @@ import 'package:heyyo_trip/modules/homepage/profile/view/profile_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/search_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/select_date_screen.dart';
 
-final router = GoRouter(initialLocation: '/', routes: [
+final router = GoRouter(initialLocation: '/login', routes: [
   GoRoute(
     path: '/login',
     builder: (context, state) => const LoginScreen(),
@@ -79,11 +80,10 @@ final router = GoRouter(initialLocation: '/', routes: [
     pageBuilder: (context, state) =>
         const NoTransitionPage(child: SelectDateScreen()),
   ),
-  // GoRoute(
-  //   path: '/hotel/search/select-date',
-  //   builder: (context, state) => BlocProvider.value(
-  //     value: state.extra as SearchDateBloc,
-  //     child: const SelectDateScreen(),
-  //   ),
-  // ),
+  GoRoute(
+    path: '/signup',
+    builder: (context, state) => const SignUpScreen(),
+    pageBuilder: (context, state) =>
+        const NoTransitionPage(child: SignUpScreen()),
+  ),
 ]);

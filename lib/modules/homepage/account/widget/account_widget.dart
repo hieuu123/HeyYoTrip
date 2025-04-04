@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AccountAppBar({super.key});
+
+  Future<String> fetchUserName() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      final data = doc.data();
+      if (data != null) {
+        return '${data['lastName']} ${data['firstName']}';
+      }
+    }
+    return 'User';
+  }
 
   @override
   Size get preferredSize => const Size.fromHeight(130);
@@ -31,12 +48,31 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
               SvgPicture.asset('assets/icons/avt.svg'),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 6.0),
-            child: SubHeadingText(
-              text: 'Trong Hieu',
-              fontsize: 18,
-              color: Color(0xFFFFFFFF),
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: FutureBuilder<String>(
+              future: fetchUserName(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SubHeadingText(
+                    text: 'Loading...',
+                    fontsize: 18,
+                    color: Color(0xFFFFFFFF),
+                  );
+                } else if (snapshot.hasError) {
+                  return const SubHeadingText(
+                    text: 'Error',
+                    fontsize: 18,
+                    color: Color(0xFFFFFFFF),
+                  );
+                } else {
+                  return SubHeadingText(
+                    text: snapshot.data ?? 'User',
+                    fontsize: 18,
+                    color: const Color(0xFFFFFFFF),
+                  );
+                }
+              },
             ),
           )
         ],
@@ -84,7 +120,11 @@ class AccountOptions extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Expanded(child: BodyText(text: title, color: color,)),
+          Expanded(
+              child: BodyText(
+            text: title,
+            color: color,
+          )),
           IconButton(
               onPressed: onTap,
               icon: SvgPicture.asset('assets/icons/forward.svg'))

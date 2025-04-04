@@ -72,74 +72,77 @@ class SearchField extends StatelessWidget {
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                            'assets/icons/hotel-search-calendar.svg'),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () => GoRouter.of(context).push(
-                              '/hotel/search/select-date',
-                              extra: BlocProvider.of<SearchDateBloc>(context)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const BodyText(text: 'Check in'),
-                              SubHeadingText(
-                                text: checkInText,
-                                fontsize: 16,
-                                color: const Color(0xFF333333),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(width: 15),
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                  color: const Color(0xFFD7D7D7), width: 1)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 10),
-                            child: BodyText(
-                              text: state.nights == 0 
-                                  ? '0 night'
-                                  : state.nights == 1 
-                                      ? '1 night' 
-                                      : '${state.nights} nights',
-                              fontsize: 12,
+                child: SizedBox(
+                  width: maxWidth < 390 ? maxWidth - 35 : maxWidth - 55,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                              'assets/icons/hotel-search-calendar.svg'),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () => GoRouter.of(context).push(
+                                '/hotel/search/select-date',
+                                extra: BlocProvider.of<SearchDateBloc>(context)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const BodyText(text: 'Check in'),
+                                SubHeadingText(
+                                  text: checkInText,
+                                  fontsize: 16,
+                                  color: const Color(0xFF333333),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(width: 15),
+                          Container(
+                            // alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                    color: const Color(0xFFD7D7D7), width: 1)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 10),
+                              child: BodyText(
+                                text: state.nights == 0 
+                                    ? '0 night'
+                                    : state.nights == 1 
+                                        ? '1 night' 
+                                        : '${state.nights} nights',
+                                fontsize: 12,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () => GoRouter.of(context).push(
-                              '/hotel/search/select-date',
-                              extra: BlocProvider.of<SearchDateBloc>(context)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const BodyText(text: 'Check out'),
-                              SubHeadingText(
-                                text: checkOutText,
-                                fontsize: 16,
-                                color: const Color(0xFF333333),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    )
-                  ],
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () => GoRouter.of(context).push(
+                                '/hotel/search/select-date',
+                                extra: BlocProvider.of<SearchDateBloc>(context)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const BodyText(text: 'Check out'),
+                                SubHeadingText(
+                                  text: checkOutText,
+                                  fontsize: 16,
+                                  color: const Color(0xFF333333),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               const Padding(

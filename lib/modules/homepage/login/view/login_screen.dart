@@ -108,34 +108,54 @@ class LoginScreenState extends State<LoginScreen> {
                       ValueListenableBuilder(
                         valueListenable: isInputValid,
                         builder: (context, isReady, child) {
-                          return SizedBox(
-                          width: 320,
-                          height: 48,
-                          child: BlocBuilder<AuthBloc, AuthState>(
-                            builder: (context, state) {
-                              bool isInputValid = emailController.text.isNotEmpty && 
-                                                passwordController.text.isNotEmpty;
-                              return PrimaryButton(
-                                text: state is AuthLoading
-                                    ? 'Loading...'
-                                    : 'Sign In',
-                                isReady: isInputValid && state is! AuthLoading,
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    context.read<AuthBloc>().add(
-                                          LoginEvent(
-                                            email: emailController.text,
-                                            password: passwordController.text,
-                                          ),
-                                        );
+                          return Column(
+                            children: [
+                              SizedBox(
+                                width: 320,
+                                height: 48,
+                                child: BlocBuilder<AuthBloc, AuthState>(
+                                  builder: (context, state) {
+                                    bool isInputValid = emailController.text.isNotEmpty && 
+                                                      passwordController.text.isNotEmpty;
+                                    return PrimaryButton(
+                                      text: state is AuthLoading
+                                          ? 'Loading...'
+                                          : 'Sign In',
+                                      isReady: isInputValid && state is! AuthLoading,
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AuthBloc>().add(
+                                                LoginEvent(
+                                                  email: emailController.text,
+                                                  password: passwordController.text,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                              BlocBuilder<AuthBloc, AuthState>(
+                                builder: (context, state) {
+                                  if (state is AuthFailure) {
+                                    return const Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        'Wrong email or password',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    );
                                   }
+                                  return const SizedBox.shrink();
                                 },
-                              );
-                            },
-                          ),
-                        );
+                              ),
+                            ],
+                          );
                         },
-                        // child: 
                       )
                     ],
                   )),
@@ -166,11 +186,13 @@ class LoginScreenState extends State<LoginScreen> {
                 padding: EdgeInsets.only(top: 30.0, bottom: 10),
                 child: LinkText(text: 'Forgot Password?'),
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BodyText(text: "Don't have an account?"),
-                  LinkText(text: ' Sign Up')
+                  const BodyText(text: "Don't have an account?"),
+                  GestureDetector(
+                    onTap: () => GoRouter.of(context).push('/signup'),
+                    child: const LinkText(text: ' Sign Up'))
                 ],
               )
             ],

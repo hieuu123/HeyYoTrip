@@ -20,7 +20,7 @@ class SignInAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 1,
               style: BorderStyle.solid)),
       leading: IconButton(
-          onPressed: () {},
+          onPressed: () => GoRouter.of(context).pop(),
           icon: SvgPicture.asset(
             'assets/icons/back.svg',
             width: 12,

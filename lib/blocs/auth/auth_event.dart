@@ -5,7 +5,7 @@ class LoginEvent extends AuthEvent {
   final String phone;
   final String password;
 
-  LoginEvent({this.email ='', this.phone='', this.password=''});
+  LoginEvent({this.email = '', this.phone = '', this.password = ''});
 }
 
 class RegisterEvent extends AuthEvent {
@@ -15,8 +15,12 @@ class RegisterEvent extends AuthEvent {
   final String phone;
   final String password;
 
-  RegisterEvent({required this.firstName, required this.lastName, required this.email,
-  required this.phone, required this.password});
+  RegisterEvent(
+      {required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.phone,
+      required this.password});
 }
 
 class LogoutEvent extends AuthEvent {}
