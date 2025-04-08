@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
+import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
+import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
 import 'package:heyyo_trip/modules/homepage/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_state.dart';
@@ -11,7 +13,6 @@ import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 import 'package:heyyo_trip/modules/hotel/search/blocs/search_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,35 +20,20 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final prefs = await SharedPreferences.getInstance();
-  final uid = prefs.getString('uid');
-  final email = prefs.getString('email') ?? '';
-  final firstName = prefs.getString('firstName') ?? '';
-  final lastName = prefs.getString('lastName') ?? '';
-  final phone = prefs.getString('phone') ?? '';
-
-  final bool isLoggedIn =
-      FirebaseAuth.instance.currentUser != null && uid != null;
+  final user = await PreferencesManager.getUser();
+  final isLoggedIn = FirebaseAuth.instance.currentUser != null && user != null;
 
   runApp(MyApp(
     isLoggedIn: isLoggedIn,
-    profileInfo: {
-      'name': '$lastName $firstName',
-      'email': email,
-      'phone': phone,
-    },
+    user: user,
   ));
 }
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
-  final Map<String, String> profileInfo;
+  final UserModel? user;
 
-  const MyApp({
-    super.key,
-    required this.isLoggedIn,
-    required this.profileInfo,
-  });
+  const MyApp({super.key, required this.isLoggedIn, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +45,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => BottomNavBloc()),
         BlocProvider(create: (context) => CategoryBloc()),
         BlocProvider(
-          create: (context) => ProfileBloc()..add(LoadProfileFromFirestore()),
+          create: (context) => ProfileBloc()
+            ..add(
+              user != null
+                  ? UpdateProfile(
+                      name: '${user!.lastName} ${user!.firstName}',
+                      email: user!.email,
+                      phone: user!.phone,
+                      birth: '06/01/2003',
+                      gender: 'Male',
+                      country: 'Vietnam',
+                      address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+                      countryCode: 'VN',
+                    )
+                  : LoadProfileFromFirestore(),
+            ),
         ),
         BlocProvider(create: (context) => BookingsBloc()),
         BlocProvider(create: (context) => SearchDateBloc()),

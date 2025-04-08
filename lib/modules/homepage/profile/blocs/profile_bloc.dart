@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
+import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +32,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         print("❌ Error updating Firestore: $e");
       }
 
-      // 2. Cập nhật state local
+      // 2. Cập nhật SharedPreferences (OOP)
+      final updatedUser = UserModel(
+        uid: uid,
+        email: event.email,
+        phone: event.phone,
+        firstName: firstName,
+        lastName: lastName,
+      );
+
+      await PreferencesManager.saveUser(updatedUser);
+
+      // 3. Cập nhật state local
       emit(state.copyWith(
         name: event.name,
         email: event.email,
