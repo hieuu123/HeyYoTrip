@@ -5,6 +5,7 @@ import 'auth_event.dart';
 import 'auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -32,6 +33,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 '${data?['lastName'] ?? ''} ${data?['firstName'] ?? ''}';
             final email = data?['email'] ?? '';
             final phone = data?['phone'] ?? '';
+
+            // Save SharedPreferences
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('uid', uid);
+            await prefs.setString('email', email);
+            await prefs.setString('firstName', data?['firstName'] ?? '');
+            await prefs.setString('lastName', data?['lastName'] ?? '');
+            await prefs.setString('phone', phone);
 
             if (event.context.mounted) {
               event.context.read<ProfileBloc>().add(UpdateProfile(
@@ -100,6 +109,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
           print("✅ Firestore write successful for UID: $uid");
 
+          // ✅ Lưu thông tin vào SharedPreferences
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('uid', uid);
+          await prefs.setString('email', event.email);
+          await prefs.setString('firstName', event.firstName);
+          await prefs.setString('lastName', event.lastName);
+          await prefs.setString('phone', event.phone);
+
           // ✅ Update ProfileBloc tại đây
           if (event.context.mounted) {
             event.context.read<ProfileBloc>().add(UpdateProfile(
@@ -129,7 +146,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     // Xử lý sự kiện Logout
-    on<LogoutEvent>((event, emit) {
+    on<LogoutEvent>((event, emit) async {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
       emit(AuthLoggedOut());
     });
   }
