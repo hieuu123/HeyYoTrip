@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
+import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
+import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
 import 'package:heyyo_trip/modules/homepage/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
+import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 import 'package:heyyo_trip/modules/hotel/search/blocs/search_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -16,38 +20,65 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (context) => AuthBloc()),
-      BlocProvider(create: (context) => BottomNavBloc()),
-      BlocProvider(create: (context) => CategoryBloc()),
-      BlocProvider(create: (context) => ProfileBloc()),
-      BlocProvider(create: (context) => BookingsBloc()),
-      BlocProvider(create: (context) => SearchDateBloc()),
-    ],
-    child: const MyApp(),
+  final user = await PreferencesManager.getUser();
+  final isLoggedIn = FirebaseAuth.instance.currentUser != null && user != null;
+
+  runApp(MyApp(
+    isLoggedIn: isLoggedIn,
+    user: user,
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  final UserModel? user;
+
+  const MyApp({super.key, required this.isLoggedIn, required this.user});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
-      builder: (context, child) {
-        return Material(
-          child: BlocBuilder<BottomNavBloc, BottomNavState>(
-            builder: (context, state) {
-              return Scaffold(
-                body: child,
-              );
-            },
-          ),
-        );
-      },
+    final router = buildRouter(initialLocation: isLoggedIn ? '/' : '/login');
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => BottomNavBloc()),
+        BlocProvider(create: (context) => CategoryBloc()),
+        BlocProvider(
+          create: (context) => ProfileBloc()
+            ..add(
+              user != null
+                  ? UpdateProfile(
+                      name: '${user!.lastName} ${user!.firstName}',
+                      email: user!.email,
+                      phone: user!.phone,
+                      birth: '06/01/2003',
+                      gender: 'Male',
+                      country: 'Vietnam',
+                      address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+                      countryCode: 'VN',
+                    )
+                  : LoadProfileFromFirestore(),
+            ),
+        ),
+        BlocProvider(create: (context) => BookingsBloc()),
+        BlocProvider(create: (context) => SearchDateBloc()),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
+        builder: (context, child) {
+          return Material(
+            child: BlocBuilder<BottomNavBloc, BottomNavState>(
+              builder: (context, state) {
+                return Scaffold(
+                  body: child,
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
+import 'package:heyyo_trip/blocs/auth/auth_event.dart';
 import 'package:heyyo_trip/modules/homepage/account/enum/account_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +65,7 @@ extension AccountOptionExtension on AccountOption {
   }
 
   Color get color {
-    return this == AccountOption.logout 
+    return this == AccountOption.logout
         ? const Color(0xFFDC3545)
         : const Color(0xFF666666);
   }
@@ -97,6 +100,7 @@ extension AccountOptionExtension on AccountOption {
         return () => GoRouter.of(context).push('/settings');
       case AccountOption.logout:
         return () {
+          context.read<AuthBloc>().add(LogoutEvent());
           GoRouter.of(context).go('/login');
         };
     }

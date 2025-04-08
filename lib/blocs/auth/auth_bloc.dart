@@ -1,10 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
+import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -32,6 +35,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 '${data?['lastName'] ?? ''} ${data?['firstName'] ?? ''}';
             final email = data?['email'] ?? '';
             final phone = data?['phone'] ?? '';
+
+            final user = UserModel(
+              uid: uid,
+              email: email,
+              firstName: data?['firstName'] ?? '',
+              lastName: data?['lastName'] ?? '',
+              phone: phone,
+            );
+
+            await PreferencesManager.saveUser(user);
 
             if (event.context.mounted) {
               event.context.read<ProfileBloc>().add(UpdateProfile(
@@ -100,6 +113,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
           print("✅ Firestore write successful for UID: $uid");
 
+          final user = UserModel(
+            uid: uid,
+            email: event.email,
+            firstName: event.firstName,
+            lastName: event.lastName,
+            phone: event.phone,
+          );
+
+          await PreferencesManager.saveUser(user);
+
           // ✅ Update ProfileBloc tại đây
           if (event.context.mounted) {
             event.context.read<ProfileBloc>().add(UpdateProfile(
@@ -129,7 +152,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     // Xử lý sự kiện Logout
-    on<LogoutEvent>((event, emit) {
+    on<LogoutEvent>((event, emit) async {
+      await PreferencesManager.clearUser();
+      await FirebaseAuth.instance.signOut();
       emit(AuthLoggedOut());
     });
   }
