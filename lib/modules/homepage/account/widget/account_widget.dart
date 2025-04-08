@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AccountAppBar({super.key});
+  final String name;
 
-  Future<String> fetchUserName() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      final data = doc.data();
-      if (data != null) {
-        return '${data['lastName']} ${data['firstName']}';
-      }
-    }
-    return 'User';
-  }
+  const AccountAppBar({super.key, required this.name});
 
   @override
   Size get preferredSize => const Size.fromHeight(130);
@@ -32,12 +17,12 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 130,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight)
-            // color: Colors.red
-            ),
+          gradient: LinearGradient(
+            colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
       ),
       title: Column(
         children: [
@@ -50,31 +35,12 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 6.0),
-            child: FutureBuilder<String>(
-              future: fetchUserName(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SubHeadingText(
-                    text: 'Loading...',
-                    fontsize: 18,
-                    color: Color(0xFFFFFFFF),
-                  );
-                } else if (snapshot.hasError) {
-                  return const SubHeadingText(
-                    text: 'Error',
-                    fontsize: 18,
-                    color: Color(0xFFFFFFFF),
-                  );
-                } else {
-                  return SubHeadingText(
-                    text: snapshot.data ?? 'User',
-                    fontsize: 18,
-                    color: const Color(0xFFFFFFFF),
-                  );
-                }
-              },
+            child: SubHeadingText(
+              text: name,
+              fontsize: 18,
+              color: Colors.white,
             ),
-          )
+          ),
         ],
       ),
       actions: [
@@ -84,11 +50,12 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
             Padding(
               padding: const EdgeInsets.only(top: 5.0),
               child: IconButton(
-                  onPressed: () {},
-                  icon: Badge(
-                    backgroundColor: const Color(0xFFDC3545),
-                    child: SvgPicture.asset('assets/icons/bell.svg'),
-                  )),
+                onPressed: () {},
+                icon: Badge(
+                  backgroundColor: const Color(0xFFDC3545),
+                  child: SvgPicture.asset('assets/icons/bell.svg'),
+                ),
+              ),
             ),
           ],
         )
