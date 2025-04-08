@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_bloc.dart';
@@ -8,10 +7,15 @@ import 'package:heyyo_trip/modules/homepage/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
 import 'package:heyyo_trip/modules/hotel/search/blocs/search_bloc.dart';
-// import 'package:heyyo_trip/config/theme.dart';
-// import 'package:heyyo_trip/common/widget/section.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(create: (context) => AuthBloc()),

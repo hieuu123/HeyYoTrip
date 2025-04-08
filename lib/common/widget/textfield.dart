@@ -8,15 +8,22 @@ class AppTextFormField extends StatefulWidget {
   final String prefixIcon;
   final String suffixIcon;
   final String? Function(String?)? validator;
-  // final Function(String)? onChanged;
+  final bool hasPrefix;
+  final TextInputAction? textInputAction;
+  final Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   const AppTextFormField(
-      {required this.prefixIcon,
+      {this.prefixIcon = 'assets/icons/person.svg',
       this.hintText = '',
       required this.controller,
       this.isPassword = false,
       this.suffixIcon = 'assets/icons/blank.svg',
       this.validator,
+      this.hasPrefix = true,
+      this.textInputAction,
+      this.onFieldSubmitted,
+      this.focusNode,
       super.key});
 
   @override
@@ -32,23 +39,28 @@ class AppTextFormFieldState extends State<AppTextFormField> {
       controller: widget.controller,
       validator: widget.validator,
       obscureText: widget.isPassword && !isPasswordVisible,
+      textInputAction: widget.textInputAction,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      focusNode: widget.focusNode,
       decoration: InputDecoration(
-          prefixIcon: SizedBox(
-            height: 32,
-            width: 32,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: SvgPicture.asset(
-                widget.prefixIcon,
-                width: 10,
-              ),
-            ),
-          ),
+          prefixIcon: widget.hasPrefix
+              ? SizedBox(
+                  height: 32,
+                  width: 32,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SvgPicture.asset(
+                      widget.prefixIcon,
+                      width: 10,
+                    ),
+                  ),
+                )
+              : null,
           suffixIcon: widget.isPassword
               ? IconButton(
                   icon: isPasswordVisible
-                  ? SvgPicture.asset('assets/icons/eye-off.svg')
-                  : SvgPicture.asset('assets/icons/eye-open.svg'),
+                      ? SvgPicture.asset('assets/icons/eye-off.svg')
+                      : SvgPicture.asset('assets/icons/eye-open.svg'),
                   onPressed: () {
                     setState(() {
                       isPasswordVisible = !isPasswordVisible;

@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AccountAppBar({super.key});
+  final String name;
+
+  const AccountAppBar({super.key, required this.name});
 
   @override
   Size get preferredSize => const Size.fromHeight(130);
@@ -15,12 +17,12 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 130,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight)
-            // color: Colors.red
-            ),
+          gradient: LinearGradient(
+            colors: [Color(0xFF67CEFD), Color(0xFF155FD1)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
       ),
       title: Column(
         children: [
@@ -31,14 +33,14 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
               SvgPicture.asset('assets/icons/avt.svg'),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 6.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
             child: SubHeadingText(
-              text: 'Trong Hieu',
+              text: name,
               fontsize: 18,
-              color: Color(0xFFFFFFFF),
+              color: Colors.white,
             ),
-          )
+          ),
         ],
       ),
       actions: [
@@ -48,11 +50,12 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
             Padding(
               padding: const EdgeInsets.only(top: 5.0),
               child: IconButton(
-                  onPressed: () {},
-                  icon: Badge(
-                    backgroundColor: const Color(0xFFDC3545),
-                    child: SvgPicture.asset('assets/icons/bell.svg'),
-                  )),
+                onPressed: () {},
+                icon: Badge(
+                  backgroundColor: const Color(0xFFDC3545),
+                  child: SvgPicture.asset('assets/icons/bell.svg'),
+                ),
+              ),
             ),
           ],
         )
@@ -84,7 +87,11 @@ class AccountOptions extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Expanded(child: BodyText(text: title, color: color,)),
+          Expanded(
+              child: BodyText(
+            text: title,
+            color: color,
+          )),
           IconButton(
               onPressed: onTap,
               icon: SvgPicture.asset('assets/icons/forward.svg'))

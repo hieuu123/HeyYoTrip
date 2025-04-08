@@ -67,7 +67,7 @@ class RecentSearchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: maxWidth < 390 ? maxWidth / 2.2 : maxWidth / 2.4,
+      width: maxWidth / 2.2,
       height: 170,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

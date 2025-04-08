@@ -73,7 +73,7 @@ class SearchField extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: SizedBox(
-                  width: maxWidth < 390 ? maxWidth - 40 : maxWidth - 60,
+                  width: maxWidth < 390 ? maxWidth - 35 : maxWidth - 55,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -104,7 +104,7 @@ class SearchField extends StatelessWidget {
                         children: [
                           const SizedBox(width: 15),
                           Container(
-                            alignment: Alignment.center,
+                            // alignment: Alignment.centerLeft,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                                 border: Border.all(

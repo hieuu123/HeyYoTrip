@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "273442563150",
+    "project_id": "heyyo-trip-7d7b8",
+    "storage_bucket": "heyyo-trip-7d7b8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273442563150:android:7613adecc65447c42acf1f",
+        "android_client_info": {
+          "package_name": "com.example.heyyo_trip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Km0U497KfOlCpejN_UaHV6hu1mkgVNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

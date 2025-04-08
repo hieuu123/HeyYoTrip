@@ -21,3 +21,5 @@ class UpdateProfile extends ProfileEvent {
     required this.countryCode,
   });
 }
+
+class LoadProfileFromFirestore extends ProfileEvent {}
