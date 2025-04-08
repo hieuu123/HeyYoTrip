@@ -108,27 +108,25 @@ class CalendarMonthView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               children: dates.map((date) {
                 final bool isCurrentMonth = date.month == month.month;
-                final bool isToday = date.day == now.day &&
+                final bool isToday = isCurrentMonth && 
+                    date.day == now.day &&
                     date.month == now.month &&
                     date.year == now.year;
-                final bool isSelected = (checkIn != null &&
+                final bool isSelected = isCurrentMonth && (
+                    (checkIn != null &&
                         date.day == checkIn!.day &&
                         date.month == checkIn!.month &&
-                        date.year == checkIn!.year &&
-                        date.month == month.month &&
-                        date.year == month.year) ||
+                        date.year == checkIn!.year) ||
                     (checkOut != null &&
                         date.day == checkOut!.day &&
                         date.month == checkOut!.month &&
-                        date.year == checkOut!.year &&
-                        date.month == month.month &&
-                        date.year == month.year);
-                final bool isInRange = checkIn != null &&
+                        date.year == checkOut!.year)
+                );
+                final bool isInRange = isCurrentMonth &&
+                    checkIn != null &&
                     checkOut != null &&
-                    date.isAfter(checkIn!) &&
-                    date.isBefore(checkOut!) &&
-                    date.month == month.month &&
-                    date.year == month.year;
+                    date.isAfter(DateTime(checkIn!.year, checkIn!.month, checkIn!.day - 1)) &&
+                    date.isBefore(DateTime(checkOut!.year, checkOut!.month, checkOut!.day + 1));
                 return GestureDetector(
                   onTap: () {
                     if (isCurrentMonth) {

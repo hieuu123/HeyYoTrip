@@ -37,7 +37,7 @@ class PromotionContent extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 16),
                           child: SizedBox(
                             width: maxWidth - 32,
-                            height: maxHeight / 8.5,
+                            height: maxHeight < 775 ? maxHeight / 7 : maxHeight / 8.5,
                             child: Row(
                               children: [
                                 Container(
