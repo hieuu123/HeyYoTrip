@@ -7,7 +7,7 @@ import 'auth_event.dart';
 import 'auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -155,6 +155,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogoutEvent>((event, emit) async {
       await PreferencesManager.clearUser();
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
       emit(AuthLoggedOut());
     });
   }

@@ -8,6 +8,8 @@ import 'package:heyyo_trip/blocs/auth/auth_event.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 import 'package:heyyo_trip/common/widget/textfield.dart';
+import 'package:heyyo_trip/modules/homepage/login/enum/login_enum.dart';
+import 'package:heyyo_trip/modules/homepage/login/extension/login_extension.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -22,11 +24,11 @@ class _LoginFormState extends State<LoginForm> {
   final passwordController = TextEditingController();
   ValueNotifier<bool> isInputValid = ValueNotifier(false);
 
-  final List<String> socials = [
-    'assets/icons/apple.svg',
-    'assets/icons/facebook.svg',
-    'assets/icons/binance.svg',
-    'assets/icons/g+.svg',
+  final List<SocialType> socials = [
+    SocialType.apple,
+    SocialType.facebook,
+    SocialType.binance,
+    SocialType.google,
   ];
 
   @override
@@ -161,13 +163,16 @@ class _LoginFormState extends State<LoginForm> {
             ),
             itemCount: socials.length,
             itemBuilder: (context, index) {
-              return SizedBox(
-                height: 40,
-                width: 40,
-                child: SvgPicture.asset(
-                  socials[index],
+              return GestureDetector(
+                onTap: () => socials[index].onTap(context),
+                child: SizedBox(
                   height: 40,
                   width: 40,
+                  child: SvgPicture.asset(
+                    socials[index].assetPath,
+                    height: 40,
+                    width: 40,
+                  ),
                 ),
               );
             },

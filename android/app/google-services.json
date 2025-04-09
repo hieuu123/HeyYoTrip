@@ -12,7 +12,20 @@
           "package_name": "com.example.heyyo_trip"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "273442563150-u3tgo4cerhgan001u67jeiop63q4bcpr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.heyyo_trip",
+            "certificate_hash": "33986d06e63e263bec7c1039c66e63512e4f8032"
+          }
+        },
+        {
+          "client_id": "273442563150-brpb42is5r4ev18gsle3t115n47aes6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA0Km0U497KfOlCpejN_UaHV6hu1mkgVNc"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273442563150-brpb42is5r4ev18gsle3t115n47aes6c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "273442563150-a2q0n4v0ni3oe03d2emia74jaojae432.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.heyyoTrip"
+              }
+            }
+          ]
         }
       }
     }
