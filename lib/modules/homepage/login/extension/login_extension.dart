@@ -66,20 +66,16 @@ extension SocialTypeExtension on SocialType {
             : null,
       );
 
-      // 1. Chọn tài khoản Google
       final googleUser = await googleSignIn.signIn();
-      if (googleUser == null) return; // Người dùng cancel
+      if (googleUser == null) return;
 
-      // 2. Lấy token xác thực
       final googleAuth = await googleUser.authentication;
 
-      // 3. Tạo credential để đăng nhập Firebase
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // 4. Đăng nhập Firebase bằng Google
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       final user = userCredential.user;
@@ -87,17 +83,29 @@ extension SocialTypeExtension on SocialType {
       if (user == null) return;
 
       final uid = user.uid;
-      final email = user.email ?? '';
-      final name = user.displayName ?? '';
-      final firstName = name.split(' ').last;
-      final lastName = name.split(' ').length > 1
-          ? name.split(' ').sublist(0, name.split(' ').length - 1).join(' ')
-          : '';
 
-      // 5. Nếu là người dùng mới, lưu thông tin vào Firestore
       final doc =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (!doc.exists) {
+
+      late String firstName;
+      late String lastName;
+      String email = user.email ?? '';
+      String phone = '';
+
+      if (doc.exists) {
+        final data = doc.data()!;
+        firstName = data['firstName'] ?? '';
+        lastName = data['lastName'] ?? '';
+        phone = data['phone'] ?? '';
+        email = data['email'] ?? '';
+      } else {
+        // Nếu là user mới
+        final name = user.displayName ?? '';
+        firstName = name.split(' ').last;
+        lastName = name.split(' ').length > 1
+            ? name.split(' ').sublist(0, name.split(' ').length - 1).join(' ')
+            : '';
+
         await FirebaseFirestore.instance.collection('users').doc(uid).set({
           'email': email,
           'firstName': firstName,
@@ -107,22 +115,21 @@ extension SocialTypeExtension on SocialType {
         });
       }
 
-      // 6. Lưu vào SharedPreferences
       final userModel = UserModel(
         uid: uid,
         email: email,
         firstName: firstName,
         lastName: lastName,
-        phone: '',
+        phone: phone,
       );
+
       await PreferencesManager.saveUser(userModel);
 
-      // 7. Update ProfileBloc
       if (context.mounted) {
         context.read<ProfileBloc>().add(UpdateProfile(
               name: '$lastName $firstName',
               email: email,
-              phone: '',
+              phone: phone,
               birth: '06/01/2003',
               gender: 'Male',
               country: 'Vietnam',
@@ -130,7 +137,6 @@ extension SocialTypeExtension on SocialType {
               countryCode: 'VN',
             ));
 
-        // 8. Điều hướng về home
         context.go('/');
       }
     } catch (e) {
