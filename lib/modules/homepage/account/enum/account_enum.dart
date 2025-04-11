@@ -1,5 +1,6 @@
 enum AccountOption {
   profile,
+  maps,
   points,
   promotionCode,
   language,

@@ -1,4 +1,10 @@
 buildscript {
+    ext {
+        compileSdkVersion = 35
+        minSdkVersion = 23
+        targetSdkVersion = 35
+        kotlin_version = '1.7.10'
+    }
     repositories {
         google()
         mavenCentral()

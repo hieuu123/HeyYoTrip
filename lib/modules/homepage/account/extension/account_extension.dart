@@ -10,6 +10,8 @@ extension AccountOptionExtension on AccountOption {
     switch (this) {
       case AccountOption.profile:
         return 'assets/icons/profile-account.svg';
+      case AccountOption.maps:
+        return 'assets/icons/language-account.svg';
       case AccountOption.points:
         return 'assets/icons/points-account.svg';
       case AccountOption.promotionCode:
@@ -39,6 +41,8 @@ extension AccountOptionExtension on AccountOption {
     switch (this) {
       case AccountOption.profile:
         return 'Profile';
+      case AccountOption.maps:
+        return 'Maps';
       case AccountOption.points:
         return 'My points';
       case AccountOption.promotionCode:
@@ -78,6 +82,8 @@ extension AccountOptionExtension on AccountOption {
     switch (this) {
       case AccountOption.profile:
         return () => GoRouter.of(context).push('/profile');
+      case AccountOption.maps:
+        return () => GoRouter.of(context).push('/maps');
       case AccountOption.points:
         return () => GoRouter.of(context).push('/points');
       case AccountOption.promotionCode:

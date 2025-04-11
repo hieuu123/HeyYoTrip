@@ -11,6 +11,7 @@ import 'package:heyyo_trip/modules/homepage/profile/view/edit_profile_screen.dar
 import 'package:heyyo_trip/modules/homepage/profile/view/profile_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/search_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/select_date_screen.dart';
+import 'package:heyyo_trip/modules/map/view/map_screen.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 GoRouter buildRouter({required String initialLocation}) {
@@ -73,6 +74,12 @@ GoRouter buildRouter({required String initialLocation}) {
           );
           return HelpCenterDetailsScreen(category: category);
         },
+      ),
+      GoRoute(
+        path: '/maps',
+        builder: (context, state) => const MapScreen(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: MapScreen()),
       ),
       GoRoute(
         path: '/promotion-details',
