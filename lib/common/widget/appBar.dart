@@ -125,20 +125,23 @@ class HeaderNav extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              children: [
-                Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset('assets/icons/round-shape.svg'),
-                  SvgPicture.asset('assets/icons/flight.svg')
-                ]),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: SubHeadingText(
-                    text: 'Flights',
-                    color: Colors.white,
-                  ),
-                )
-              ],
+            GestureDetector(
+              onTap: () => GoRouter.of(context).push('/flight/search'),
+              child: Column(
+                children: [
+                  Stack(alignment: Alignment.center, children: [
+                    SvgPicture.asset('assets/icons/round-shape.svg'),
+                    SvgPicture.asset('assets/icons/flight.svg')
+                  ]),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: SubHeadingText(
+                      text: 'Flights',
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
             Column(
               children: [

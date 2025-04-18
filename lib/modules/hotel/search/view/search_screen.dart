@@ -15,7 +15,7 @@ class HotelSearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const HotelSearchAppBar(),
+      appBar: const HotelSearchAppBar(title: 'Hotels',),
       body: BlocListener<SearchDateBloc, SearchDateState>(
         listener: (context, state) {
           if (state.checkIn != null && state.checkOut != null) {

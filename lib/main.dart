@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
 import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
+import 'package:heyyo_trip/modules/flight/search/blocs/flight_search_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_state.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => BottomNavBloc()),
         BlocProvider(create: (context) => CategoryBloc()),
+        BlocProvider(create: (context) => FlightSearchBloc()),
         BlocProvider(
           create: (context) => ProfileBloc()
             ..add(
@@ -63,6 +65,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => BookingsBloc()),
         BlocProvider(create: (context) => SearchDateBloc()),
+        BlocProvider(create: (context) => FlightDateBloc()),
+        BlocProvider(create: (context) => SelectPassengerBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

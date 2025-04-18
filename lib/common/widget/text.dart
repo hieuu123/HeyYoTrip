@@ -36,12 +36,16 @@ class SubHeadingText extends StatelessWidget {
   final double fontsize;
   final bool isChosen;
   // final String fontweight;
+  final TextOverflow? overflow;
+  final int? maxLines;
 
   const SubHeadingText(
       {required this.text,
       this.color = const Color(0xFF888888),
       this.fontsize = 14,
       this.isChosen = true,
+      this.overflow,
+      this.maxLines,
       super.key});
 
   @override
@@ -53,6 +57,8 @@ class SubHeadingText extends StatelessWidget {
           fontSize: fontsize,
           fontWeight: isChosen ? FontWeight.w600 : FontWeight.w400,
           fontFamily: 'OpenSans'),
+      overflow: overflow,
+      maxLines: maxLines,
     );
   }
 }

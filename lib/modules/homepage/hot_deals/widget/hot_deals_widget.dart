@@ -57,7 +57,9 @@ class HotDealsTabBar extends StatelessWidget {
 }
 
 class SearchField extends StatelessWidget {
-  SearchField({super.key});
+  final String hintText;
+
+  SearchField({required this.hintText, super.key});
   final _searchController = TextEditingController();
 
   @override
@@ -71,7 +73,7 @@ class SearchField extends StatelessWidget {
               borderSide: BorderSide(
             color: Color(0xFFD7D7D7),
           )),
-          hintText: 'Search promotion',
+          hintText: hintText,
           hintStyle: const TextStyle(
               color: Color.fromARGB(77, 26, 32, 61),
               fontSize: 16,

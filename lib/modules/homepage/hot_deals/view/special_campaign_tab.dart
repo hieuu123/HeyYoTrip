@@ -14,7 +14,7 @@ class Tab1 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 20),
-          SearchField(),
+          SearchField(hintText: 'Search promotion',),
           const CampaignSelector(),
           const Expanded(
               child: SingleChildScrollView(
