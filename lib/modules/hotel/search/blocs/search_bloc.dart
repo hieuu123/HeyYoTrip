@@ -9,23 +9,6 @@ class SearchDateBloc extends Bloc<SearchDateEvent, SearchDateState> {
     on<ResetSearchDates>(_onResetSearchDates);
   }
 
-  // void _onUpdateSearchDates(
-  //   UpdateSearchDates event,
-  //   Emitter<SearchDateState> emit,
-  // ) {
-  //   if (event.checkIn.isAfter(event.checkOut)) {
-  //     emit(
-  //         state.copyWith(error: 'Check-in date must be before check-out date'));
-  //     return;
-  //   }
-
-  //   emit(SearchDateState(
-  //     checkIn: event.checkIn,
-  //     checkOut: event.checkOut,
-  //     nights: event.nights,
-  //   ));
-  // }
-
   void _onUpdateSearchDates(
     UpdateSearchDates event,
     Emitter<SearchDateState> emit,

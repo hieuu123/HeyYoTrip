@@ -161,6 +161,101 @@ final dealsData = [
   ["assets/images/deal-1.png", "assets/images/deal-2.png"],
 ];
 
+final flightCategories = [
+  "All Flights",
+  "Tp Hồ Chí Minh",
+  "Hà Nội",
+  "Nhật Bản",
+  "Singapore"
+];
+
+final flightData = [
+  [
+    "assets/images/cheapest-flight-1.png",
+    "assets/images/cheapest-flight-2.png",
+    "assets/images/cheapest-flight-3.png",
+    "assets/images/cheapest-flight-1.png"
+  ],
+  [
+    "assets/images/cheapest-flight-1.png",
+    "assets/images/cheapest-flight-2.png",
+    "assets/images/cheapest-flight-3.png",
+    "assets/images/cheapest-flight-2.png"
+  ],
+  [
+    "assets/images/cheapest-flight-1.png",
+    "assets/images/cheapest-flight-2.png",
+    "assets/images/cheapest-flight-3.png",
+    "assets/images/cheapest-flight-3.png"
+  ],
+  [
+    "assets/images/cheapest-flight-1.png",
+    "assets/images/cheapest-flight-2.png",
+    "assets/images/cheapest-flight-3.png",
+    "assets/images/cheapest-flight-1.png"
+  ],
+  [
+    "assets/images/cheapest-flight-1.png",
+    "assets/images/cheapest-flight-2.png",
+    "assets/images/cheapest-flight-3.png",
+    "assets/images/cheapest-flight-2.png"
+  ],
+];
+
+final flightPlaceData = [
+  [
+    {'from': 'Hà Nội', 'to': 'Đà Lạt'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Đà Lạt'},
+    {'from': 'Thái Lan', 'to': 'Tp Hồ Chí Minh'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Nhật Bản'},
+  ],
+  [
+    {'from': 'Hà Nội', 'to': 'Đà Lạt'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Đà Lạt'},
+    {'from': 'Thái Lan', 'to': 'Tp Hồ Chí Minh'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Nhật Bản'},
+  ],
+  [
+    {'from': 'Hà Nội', 'to': 'Đà Lạt'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Đà Lạt'},
+    {'from': 'Thái Lan', 'to': 'Tp Hồ Chí Minh'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Nhật Bản'},
+  ],
+  [
+    {'from': 'Hà Nội', 'to': 'Đà Lạt'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Đà Lạt'},
+    {'from': 'Thái Lan', 'to': 'Tp Hồ Chí Minh'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Nhật Bản'},
+  ],
+  [
+    {'from': 'Hà Nội', 'to': 'Đà Lạt'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Đà Lạt'},
+    {'from': 'Thái Lan', 'to': 'Tp Hồ Chí Minh'},
+    {'from': 'Tp Hồ Chí Minh', 'to': 'Nhật Bản'},
+  ]
+];
+
+final flightPopularDestinationsTitle = ['Ha Long Bay', 'Ha Noi', 'Ha Long Bay'];
+
+final flightPopularDestinationsImage = [
+  [
+    'assets/images/popular-destination-1.png',
+    'assets/images/popular-destination-2.png',
+    'assets/images/popular-destination-1.png',
+  ]
+];
+
+final airlinePartners = [
+  [
+    'assets/images/bamboo-airways.png',
+    'assets/images/jetstar.png',
+    'assets/images/vietnam-airlines.png',
+    'assets/images/vietjet-air.png',
+    'assets/images/bamboo-airways.png',
+    'assets/images/jetstar.png',
+  ]
+];
+
 final tourData = [
   {
     'image': 'assets/images/tour.jfif',

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:heyyo_trip/modules/hotel/search/blocs/search_event.dart';
+import 'package:heyyo_trip/modules/flight/search/blocs/flight_search_bloc.dart';
 import 'package:heyyo_trip/modules/hotel/search/widget/appbar.dart';
 import 'package:heyyo_trip/modules/hotel/search/widget/calendar_section.dart';
 import 'package:heyyo_trip/modules/hotel/search/widget/checkin_checkout.dart';
-import 'package:heyyo_trip/modules/hotel/search/blocs/search_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SelectDateScreen extends StatefulWidget {
-  const SelectDateScreen({super.key});
+class FlightSelectDateScreen extends StatefulWidget {
+  const FlightSelectDateScreen({super.key});
 
   @override
-  State<SelectDateScreen> createState() => _SelectDateScreenState();
+  State<FlightSelectDateScreen> createState() => _FlightSelectDateScreenState();
 }
 
-class _SelectDateScreenState extends State<SelectDateScreen> {
+class _FlightSelectDateScreenState extends State<FlightSelectDateScreen> {
   DateTime? checkInDate;
   DateTime? checkOutDate;
 
@@ -42,8 +41,8 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
     if (checkInDate != null && checkOutDate != null) {
       final nights = checkOutDate!.difference(checkInDate!).inDays;
 
-      context.read<SearchDateBloc>().add(
-            UpdateSearchDates(
+      context.read<FlightDateBloc>().add(
+            UpdateFlightDates(
               checkIn: checkInDate!,
               checkOut: checkOutDate!,
               nights: nights,

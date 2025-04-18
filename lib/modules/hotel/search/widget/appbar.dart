@@ -5,8 +5,9 @@ import 'package:heyyo_trip/common/widget/text.dart';
 
 class HotelSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
+  final String title;
 
-  const HotelSearchAppBar({this.bottom, super.key});
+  const HotelSearchAppBar({this.bottom, required this.title, super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -14,10 +15,6 @@ class HotelSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // centerTitle: true,
-      // elevation: 0,
-      // backgroundColor: Colors.transparent,
-      // shadowColor: Colors.transparent,
       automaticallyImplyLeading: false,
       toolbarHeight: 50,
       bottom: bottom,
@@ -33,18 +30,19 @@ class HotelSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
           GestureDetector(
             onTap: () => GoRouter.of(context).pop(),
             child: Padding(
-              padding: const EdgeInsets.only(top: 27, bottom: 12, right: 15, left: 5),
+              padding: const EdgeInsets.only(
+                  top: 27, bottom: 12, right: 15, left: 5),
               child: SvgPicture.asset(
                 'assets/icons/back3.svg',
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 15),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
             child: SubHeadingText(
-              text: 'Hotels',
+              text: title,
               fontsize: 16,
-              color: Color(0xFFFFFFFF),
+              color: const Color(0xFFFFFFFF),
             ),
           )
         ],
@@ -55,8 +53,11 @@ class HotelSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class SelectDateAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
+  final String title;
+  final String icon;
 
-  const SelectDateAppBar({this.bottom, super.key});
+  const SelectDateAppBar(
+      {this.bottom, required this.title, required this.icon, super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(78);
@@ -65,9 +66,6 @@ class SelectDateAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      // elevation: 0,
-      // backgroundColor: Colors.transparent,
-      // shadowColor: Colors.transparent,
       automaticallyImplyLeading: false,
       toolbarHeight: 78,
       bottom: bottom,
@@ -84,19 +82,19 @@ class SelectDateAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 30),
           child: Center(
             child: SvgPicture.asset(
-              'assets/icons/cancel.svg',
+              icon,
               height: 16,
               width: 16,
             ),
           ),
         ),
       ),
-      title: const Padding(
-        padding: EdgeInsets.only(top: 30),
+      title: Padding(
+        padding: const EdgeInsets.only(top: 30),
         child: HeadingText(
-          text: 'Select Date',
+          text: title,
           fontsize: 16,
-          color: Color(0xFFFFFFFF),
+          color: const Color(0xFFFFFFFF),
         ),
       ),
     );

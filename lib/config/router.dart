@@ -1,4 +1,8 @@
 import 'package:go_router/go_router.dart';
+import 'package:heyyo_trip/modules/flight/search/view/search_screen.dart';
+import 'package:heyyo_trip/modules/flight/search/view/select_date.dart';
+import 'package:heyyo_trip/modules/flight/search/view/select_passenger.dart';
+import 'package:heyyo_trip/modules/flight/search/view/select_place.dart';
 import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_details_screen.dart';
 import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_screen.dart';
 import 'package:heyyo_trip/modules/homepage/hot_deals/view/promotion_code_details.dart';
@@ -12,7 +16,6 @@ import 'package:heyyo_trip/modules/homepage/profile/view/profile_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/search_screen.dart';
 import 'package:heyyo_trip/modules/hotel/search/view/select_date_screen.dart';
 import 'package:heyyo_trip/modules/map/view/map_screen.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 GoRouter buildRouter({required String initialLocation}) {
   return GoRouter(
@@ -49,6 +52,12 @@ GoRouter buildRouter({required String initialLocation}) {
             const NoTransitionPage(child: EditProfileScreen()),
       ),
       GoRoute(
+        path: '/flight/search',
+        builder: (context, state) => const FlightSearchScreen(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: FlightSearchScreen()),
+      ),
+      GoRoute(
         path: '/hotel/search',
         builder: (context, state) => const HotelSearchScreen(),
         pageBuilder: (context, state) =>
@@ -59,6 +68,24 @@ GoRouter buildRouter({required String initialLocation}) {
         builder: (context, state) => const SelectDateScreen(),
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: SelectDateScreen()),
+      ),
+      GoRoute(
+        path: '/flight/search/select-date',
+        builder: (context, state) => const FlightSelectDateScreen(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: FlightSelectDateScreen()),
+      ),
+      GoRoute(
+        path: '/select-place',
+        builder: (context, state) => const SelectPlace(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: SelectPlace()),
+      ),
+      GoRoute(
+        path: '/select-passenger',
+        builder: (context, state) => const SelectPassenger(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: SelectPassenger()),
       ),
       GoRoute(
         path: '/help-center',
