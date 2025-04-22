@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
-import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
-import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 
 class EditInformationField extends StatelessWidget {
   final String title;
@@ -17,6 +14,7 @@ class EditInformationField extends StatelessWidget {
   final bool isCountry;
   final bool isEmail;
   final bool isRequired;
+  final bool isReadOnly;
 
   final FocusNode? focusNode;
   final FocusNode? nextFocus;
@@ -36,6 +34,7 @@ class EditInformationField extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.isEmail = false,
     this.isRequired = true,
+    this.isReadOnly = false,
     super.key,
   });
 
@@ -96,63 +95,58 @@ class EditInformationField extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: controller,
-              focusNode: focusNode,
-              textInputAction: textInputAction,
-              onChanged: (val) {
-                formState.didChange(val); // cập nhật lại trạng thái
-              },
-              onFieldSubmitted: (_) {
-                if (nextFocus != null) {
-                  FocusScope.of(context).requestFocus(nextFocus);
-                } else {
-                  FocusScope.of(context).unfocus();
-                }
-              },
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 12,
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:
+                      formState.hasError ? Colors.red : const Color(0xFFD7D7D7),
+                  width: 1,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: formState.hasError
-                        ? Colors.red
-                        : const Color(0xFFD7D7D7),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: formState.hasError
-                        ? Colors.red
-                        : const Color(0xFFD7D7D7),
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(
-                    width: 1,
-                    color: Colors.red,
-                  ),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(
-                    width: 1,
-                    color: Colors.red,
-                  ),
-                ),
+                borderRadius: BorderRadius.circular(4),
               ),
-              style: const TextStyle(
-                color: Color(0xFF333333),
-                fontFamily: 'OpenSans',
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      textInputAction: textInputAction,
+                      readOnly: isReadOnly,
+                      onChanged: (val) {
+                        formState.didChange(val);
+                      },
+                      onFieldSubmitted: (_) {
+                        if (nextFocus != null) {
+                          FocusScope.of(context).requestFocus(nextFocus);
+                        } else {
+                          FocusScope.of(context).unfocus();
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 12,
+                        ),
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        color: Color(0xFF333333),
+                        fontFamily: 'OpenSans',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  if (isReadOnly)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: SvgPicture.asset('assets/icons/lock.svg'),
+                    ),
+                ],
               ),
             ),
             if (formState.hasError)
@@ -212,7 +206,9 @@ class EditInformationField extends StatelessWidget {
                 children: [
                   DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      value: countryCode,
+                      value: ['VN', 'US'].contains(countryCode)
+                          ? countryCode
+                          : null,
                       icon: const Icon(Icons.keyboard_arrow_down,
                           color: Colors.grey),
                       items: countryFlags.entries.map((entry) {
@@ -277,16 +273,19 @@ class EditInformationField extends StatelessWidget {
   }
 
   Widget _buildBirthdayField(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFD7D7D7), width: 1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
+    return FormField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (controller.text.trim().isEmpty) {
+          return 'Please select your birthday';
+        }
+        return null;
+      },
+      builder: (formState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
               onTap: () async {
                 final selectedDate = await showDatePicker(
                   context: context,
@@ -297,43 +296,75 @@ class EditInformationField extends StatelessWidget {
                 if (selectedDate != null) {
                   controller.text =
                       DateFormat('dd/MM/yyyy').format(selectedDate);
+                  formState
+                      .didChange(controller.text); // cập nhật state validator
                 }
               },
               child: AbsorbPointer(
-                child: TextFormField(
-                  controller: controller,
-                  focusNode: focusNode,
-                  textInputAction: textInputAction,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your birthday',
-                    border: InputBorder.none,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: formState.hasError
+                          ? Colors.red
+                          : const Color(0xFFD7D7D7),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  style: const TextStyle(
-                    color: Color(0xFF333333),
-                    fontFamily: 'OpenSans',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter your birthday',
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            color: Color(0xFF333333),
+                            fontFamily: 'OpenSans',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          readOnly: true,
+                        ),
+                      ),
+                      IconButton(
+                        icon: SvgPicture.asset('assets/icons/calendar.svg'),
+                        onPressed: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime.now(),
+                          );
+                          if (selectedDate != null) {
+                            controller.text =
+                                DateFormat('dd/MM/yyyy').format(selectedDate);
+                            formState.didChange(controller.text);
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
-          IconButton(
-            icon: SvgPicture.asset('assets/icons/calendar.svg'),
-            onPressed: () async {
-              final selectedDate = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-              );
-              if (selectedDate != null) {
-                controller.text = DateFormat('dd/MM/yyyy').format(selectedDate);
-              }
-            },
-          )
-        ],
-      ),
+            if (formState.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 12),
+                child: Text(
+                  formState.errorText!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -342,57 +373,75 @@ class EditInformationField extends StatelessWidget {
     required List<String> options,
     required String fieldType,
   }) {
-    final state = context.read<ProfileBloc>().state;
-    final currentValue =
-        options.contains(controller.text) ? controller.text : options.first;
+    // final trimmedText = controller.text.trim();
+    // final String? currentValue =
+    //     options.contains(trimmedText) ? trimmedText : null;
 
-    return DropdownButtonFormField<String>(
-      value: currentValue,
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Color(0xFFD7D7D7),
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Color(0xFFD7D7D7),
-          ),
-        ),
-      ),
-      style: const TextStyle(
-        color: Color(0xFF333333),
-        fontFamily: 'OpenSans',
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
-      items: options
-          .map((option) => DropdownMenuItem(
-                value: option,
-                child: Text(option),
-              ))
-          .toList(),
-      onChanged: (String? newValue) {
-        if (newValue != null) {
-          controller.text = newValue;
-
-          context.read<ProfileBloc>().add(
-                UpdateProfile(
-                  name: fieldType == 'name' ? newValue : state.name,
-                  email: fieldType == 'email' ? newValue : state.email,
-                  phone: fieldType == 'phone' ? newValue : state.phone,
-                  birth: fieldType == 'birth' ? newValue : state.birth,
-                  gender: fieldType == 'gender' ? newValue : state.gender,
-                  country: fieldType == 'country' ? newValue : state.country,
-                  address: fieldType == 'address' ? newValue : state.address,
-                  countryCode: state.countryCode,
-                ),
-              );
+    return FormField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (isRequired && controller.text.trim().isEmpty) {
+          return 'Please select your $fieldType';
         }
+        return null;
+      },
+      builder: (formState) {
+        final String? currentValue = options.contains(controller.text.trim())
+            ? controller.text.trim()
+            : null;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:
+                      formState.hasError ? Colors.red : const Color(0xFFD7D7D7),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: currentValue,
+                  isExpanded: true,
+                  hint: const SubHeadingText(text: 'Select', color: Color(0xFF333333),),
+                  style: const TextStyle(
+                    color: Color(0xFF333333),
+                    fontFamily: 'OpenSans',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  items: options.map((option) {
+                    return DropdownMenuItem<String>(
+                      value: option,
+                      child: Text(option),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      controller.text = newValue;
+                      formState.didChange(newValue); // cập nhật formState
+                    }
+                  },
+                ),
+              ),
+            ),
+            if (formState.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 12),
+                child: Text(
+                  formState.errorText!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        );
       },
     );
   }

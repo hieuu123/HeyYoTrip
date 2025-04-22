@@ -17,6 +17,14 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
   DateTime? checkInDate;
   DateTime? checkOutDate;
 
+  @override
+  void initState() {
+    super.initState();
+    final state = context.read<SearchDateBloc>().state;
+    checkInDate = state.checkIn;
+    checkOutDate = state.checkOut;
+  }
+
   void _onDateSelected(DateTime selectedDate) {
     setState(() {
       if (checkInDate == null && checkOutDate == null) {
@@ -59,6 +67,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Vui lòng chọn đủ ngày check-in và check-out'),
+          duration: Duration(milliseconds: 1750),
         ),
       );
     }

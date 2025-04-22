@@ -11,15 +11,21 @@ class Tab1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HotDealsCategoryBloc(),
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          SearchField(hintText: 'Search promotion',),
-          const CampaignSelector(),
-          const Expanded(
-              child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical, child: CampaingnContent())),
-        ],
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        behavior: HitTestBehavior.translucent,
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            SearchField(
+              hintText: 'Search promotion',
+            ),
+            const CampaignSelector(),
+            const Expanded(
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical, child: CampaingnContent())),
+          ],
+        ),
       ),
     );
   }

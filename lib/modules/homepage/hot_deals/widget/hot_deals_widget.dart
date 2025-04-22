@@ -29,9 +29,9 @@ class HotDealsTabBar extends StatelessWidget {
                 ),
               ),
             ],
-            labelColor:Color(0xFF3982D1),
-            unselectedLabelColor:Color(0xFF666666),
-            indicatorColor:Color(0xFF3982D1),
+            labelColor: Color(0xFF3982D1),
+            unselectedLabelColor: Color(0xFF666666),
+            indicatorColor: Color(0xFF3982D1),
             dividerColor: Colors.transparent,
             labelStyle: TextStyle(
                 fontSize: 16,
@@ -70,6 +70,10 @@ class SearchField extends StatelessWidget {
         controller: _searchController,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+            color: Color(0xFFD7D7D7),
+          )),
+          focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
             color: Color(0xFFD7D7D7),
           )),

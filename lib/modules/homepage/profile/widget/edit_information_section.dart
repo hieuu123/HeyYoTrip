@@ -28,7 +28,7 @@ class EditInformationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FocusNode nameFocus = FocusNode();
-    final FocusNode emailFocus = FocusNode();
+    // final FocusNode emailFocus = FocusNode();
     final FocusNode phoneFocus = FocusNode();
     // final FocusNode birthFocus = FocusNode();
     final FocusNode genderFocus = FocusNode();
@@ -43,15 +43,16 @@ class EditInformationSection extends StatelessWidget {
             title: 'Name',
             controller: nameController,
             focusNode: nameFocus,
-            nextFocus: emailFocus,
+            nextFocus: phoneFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(
             title: 'Email address',
             controller: emailController,
-            focusNode: emailFocus,
-            nextFocus: phoneFocus,
-            isEmail: true
+            // focusNode: emailFocus,
+            // nextFocus: phoneFocus,
+            isEmail: true,
+            isReadOnly: true
           ),
           const SizedBox(height: 20),
           EditInformationField(
@@ -61,7 +62,7 @@ class EditInformationSection extends StatelessWidget {
             isPhone: true,
             onCountryChanged: onCountryChanged,
             focusNode: phoneFocus,
-            nextFocus: genderFocus,
+            nextFocus: addressFocus,
           ),
           const SizedBox(height: 20),
           EditInformationField(

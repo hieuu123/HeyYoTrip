@@ -16,6 +16,14 @@ class _FlightSelectDateScreenState extends State<FlightSelectDateScreen> {
   DateTime? checkInDate;
   DateTime? checkOutDate;
 
+  @override
+  void initState() {
+    super.initState();
+    final state = context.read<FlightDateBloc>().state;
+    checkInDate = state.checkIn;
+    checkOutDate = state.checkOut;
+  }
+
   void _onDateSelected(DateTime selectedDate) {
     setState(() {
       if (checkInDate == null && checkOutDate == null) {
@@ -58,6 +66,7 @@ class _FlightSelectDateScreenState extends State<FlightSelectDateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Vui lòng chọn đủ ngày check-in và check-out'),
+          duration: Duration(milliseconds: 1750),
         ),
       );
     }

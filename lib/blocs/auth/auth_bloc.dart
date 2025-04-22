@@ -8,6 +8,7 @@ import 'auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
@@ -42,6 +43,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               firstName: data?['firstName'] ?? '',
               lastName: data?['lastName'] ?? '',
               phone: phone,
+              birthDay: data?['birthDay'],
+              gender: data?['gender'],
+              country: data?['country'],
+              address: data?['address'],
+              countryCode: data?['countryCode'],
             );
 
             await PreferencesManager.saveUser(user);
@@ -51,33 +57,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                     name: fullName,
                     email: email,
                     phone: phone,
-                    birth: '06/01/2003',
-                    gender: 'Male',
-                    country: 'Vietnam',
-                    address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-                    countryCode: 'VN',
+                    birth: user.birthDay ?? '',
+                    gender: user.gender ?? '',
+                    country: user.country ?? '',
+                    address: user.address ?? '',
+                    countryCode: user.countryCode ?? '',
                   ));
             }
-          } else {
-            if (event.context.mounted) {
-              event.context.read<ProfileBloc>().add(UpdateProfile(
-                    name: 'Nguyen Trong Hieu',
-                    email: 'tronghieu@gmail.com',
-                    phone: '0987654321',
-                    birth: '06/01/2003',
-                    gender: 'Male',
-                    country: 'Vietnam',
-                    address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-                    countryCode: 'VN',
-                  ));
-            }
-          }
+          } 
+          // else {
+          //   if (event.context.mounted) {
+          //     event.context.read<ProfileBloc>().add(UpdateProfile(
+          //           name: 'Nguyen Trong Hieu',
+          //           email: 'tronghieu@gmail.com',
+          //           phone: '0987654321',
+          //           birth: '06/01/2003',
+          //           gender: 'Male',
+          //           country: 'Vietnam',
+          //           address: 'Buon Ma Thuot, Dak Lak, Vietnam',
+          //           countryCode: 'VN',
+          //         ));
+          //   }
+          // }
         }
-
+        FullScreenLoader.hide();
         emit(AuthSuccess('Login successful!'));
       } on FirebaseAuthException catch (e) {
+        FullScreenLoader.hide();
         emit(AuthFailure(e.message ?? 'Login failed'));
       } catch (e) {
+        FullScreenLoader.hide();
         emit(AuthFailure('An unexpected error occurred: $e'));
       }
     });
@@ -108,6 +117,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'lastName': event.lastName,
             'email': event.email,
             'phone': event.phone,
+            'birthDay': '',
+            'gender': '',
+            'country': '',
+            'address': '',
+            'countryCode': '',
             'createdAt': FieldValue.serverTimestamp(),
           });
 
@@ -119,6 +133,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             firstName: event.firstName,
             lastName: event.lastName,
             phone: event.phone,
+            birthDay: '',
+            gender: '',
+            country: '',
+            address: '',
+            countryCode: '',
           );
 
           await PreferencesManager.saveUser(user);
@@ -129,23 +148,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   name: '${event.lastName} ${event.firstName}',
                   email: event.email,
                   phone: event.phone,
-                  birth: '06/01/2003',
-                  gender: 'Male',
-                  country: 'Vietnam',
-                  address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-                  countryCode: 'VN',
+                  birth: '',
+                  gender: '',
+                  country: '',
+                  address: '',
+                  countryCode: '',
                 ));
           }
-
+          FullScreenLoader.hide();
           emit(AuthSuccess('Registration successful!'));
         } catch (e) {
+          FullScreenLoader.hide();
           print("❌ Firestore write error: $e");
           emit(AuthFailure('Registered but failed to save to database.'));
         }
       } on FirebaseAuthException catch (e) {
+        FullScreenLoader.hide();
         print("❌ Auth error: ${e.message}");
         emit(AuthFailure(e.message ?? 'Sign up failed'));
       } catch (e) {
+        FullScreenLoader.hide();
         print("❌ Unexpected error: $e");
         emit(AuthFailure('Unexpected error: $e'));
       }
@@ -153,10 +175,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Xử lý sự kiện Logout
     on<LogoutEvent>((event, emit) async {
-      await PreferencesManager.clearUser();
-      await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
-      emit(AuthLoggedOut());
+      try {
+        await PreferencesManager.clearUser();
+        await FirebaseAuth.instance.signOut();
+        await GoogleSignIn().signOut();
+        emit(AuthLoggedOut());
+      } finally {
+        FullScreenLoader.hide();
+      }
     });
   }
 }
