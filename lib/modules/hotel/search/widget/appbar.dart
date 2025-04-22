@@ -28,12 +28,15 @@ class HotelSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: () => GoRouter.of(context).pop(),
             child: Padding(
               padding: const EdgeInsets.only(
                   top: 27, bottom: 12, right: 15, left: 5),
-              child: SvgPicture.asset(
-                'assets/icons/back3.svg',
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/icons/back3.svg',
+                ),
               ),
             ),
           ),
@@ -78,13 +81,18 @@ class SelectDateAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: GestureDetector(
         onTap: () => GoRouter.of(context).pop(),
+        behavior: HitTestBehavior.opaque,
         child: Padding(
           padding: const EdgeInsets.only(top: 30),
-          child: Center(
-            child: SvgPicture.asset(
-              icon,
-              height: 16,
-              width: 16,
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: Center(
+              child: SvgPicture.asset(
+                icon,
+                height: 16,
+                width: 16,
+              ),
             ),
           ),
         ),

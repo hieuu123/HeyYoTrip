@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:go_router/go_router.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_event.dart';
 import 'package:heyyo_trip/blocs/auth/auth_state.dart';
 import 'package:heyyo_trip/common/widget/button.dart';
 import 'package:heyyo_trip/common/widget/text.dart';
 import 'package:heyyo_trip/common/widget/textfield.dart';
+import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -109,9 +109,10 @@ class _SignUpFormState extends State<SignUpForm> {
                         onFieldSubmitted: (_) {
                           _focusNodes['lastName']?.requestFocus();
                         },
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Please enter your first name'
-                            : null,
+                        validator: (value) =>
+                            value == null || value.isEmpty
+                                ? 'Please enter your first name'
+                                : null,
                       ),
                     ),
                   ),
@@ -129,9 +130,10 @@ class _SignUpFormState extends State<SignUpForm> {
                         onFieldSubmitted: (_) {
                           _focusNodes['email']?.requestFocus();
                         },
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Please enter your last name'
-                            : null,
+                        validator: (value) =>
+                            value == null || value.isEmpty
+                                ? 'Please enter your last name'
+                                : null,
                       ),
                     ),
                   ),
@@ -150,11 +152,13 @@ class _SignUpFormState extends State<SignUpForm> {
               hintText: 'Email',
               textInputAction: TextInputAction.next,
               focusNode: _focusNodes['email'],
-              onFieldSubmitted: (_) => _focusNodes['phone']?.requestFocus(),
+              onFieldSubmitted: (_) =>
+                  _focusNodes['phone']?.requestFocus(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
-                } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                    .hasMatch(value)) {
                   return 'Please enter a valid email';
                 }
                 return null;
@@ -172,7 +176,8 @@ class _SignUpFormState extends State<SignUpForm> {
               hintText: 'Phone Number',
               textInputAction: TextInputAction.next,
               focusNode: _focusNodes['phone'],
-              onFieldSubmitted: (_) => _focusNodes['password']?.requestFocus(),
+              onFieldSubmitted: (_) =>
+                  _focusNodes['password']?.requestFocus(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your phone number';
@@ -213,13 +218,12 @@ class _SignUpFormState extends State<SignUpForm> {
               onFieldSubmitted: (_) {
                 if (_formKey.currentState!.validate()) {
                   context.read<AuthBloc>().add(RegisterEvent(
-                        firstName: firstNameController.text,
-                        lastName: lastNameController.text,
-                        email: emailController.text,
-                        phone: phoneController.text,
-                        password: passwordController.text,
-                        context: context
-                      ));
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      email: emailController.text,
+                      phone: phoneController.text,
+                      password: passwordController.text,
+                      context: context));
                 }
               },
               validator: (value) =>
@@ -254,14 +258,14 @@ class _SignUpFormState extends State<SignUpForm> {
                           isReady: isReady && state is! AuthLoading,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              FullScreenLoader.show(context);
                               context.read<AuthBloc>().add(RegisterEvent(
-                                    firstName: firstNameController.text,
-                                    lastName: lastNameController.text,
-                                    email: emailController.text,
-                                    phone: phoneController.text,
-                                    password: passwordController.text,
-                                    context: context
-                                  ));
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
+                                  email: emailController.text,
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                  context: context));
                             }
                           },
                         );
@@ -275,7 +279,8 @@ class _SignUpFormState extends State<SignUpForm> {
                           padding: EdgeInsets.only(top: 10),
                           child: Text(
                             'Email already in use',
-                            style: TextStyle(color: Colors.red, fontSize: 14),
+                            style: TextStyle(
+                                color: Colors.red, fontSize: 14),
                           ),
                         );
                       }

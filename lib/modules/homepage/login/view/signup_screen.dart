@@ -18,19 +18,23 @@ class SignUpScreen extends StatelessWidget {
           context.go('/');
         }
       },
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: SignInAppBar(),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 50, bottom: 20),
-                  child: HeadingText(text: 'SIGN UP'),
-                ),
-                SignUpForm(),
-              ],
+        appBar: const SignInAppBar(),
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          behavior: HitTestBehavior.translucent,
+          child: const SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 50, bottom: 20),
+                    child: HeadingText(text: 'SIGN UP'),
+                  ),
+                  SignUpForm(),
+                ],
+              ),
             ),
           ),
         ),

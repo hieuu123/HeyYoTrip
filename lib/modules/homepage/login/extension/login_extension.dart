@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/common/shared_prefs/shared_prefs_manager.dart';
 import 'package:heyyo_trip/common/shared_prefs/user_model.dart';
+import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 import 'package:heyyo_trip/modules/homepage/login/enum/login_enum.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,6 +61,7 @@ extension SocialTypeExtension on SocialType {
 
   void _handleGoogleLogin(BuildContext context) async {
     try {
+      FullScreenLoader.show(context);
       final googleSignIn = GoogleSignIn(
         clientId: kIsWeb
             ? '273442563150-brpb42is5r4ev18gsle3t115n47aes6c.apps.googleusercontent.com'
@@ -67,7 +69,10 @@ extension SocialTypeExtension on SocialType {
       );
 
       final googleUser = await googleSignIn.signIn();
-      if (googleUser == null) return;
+      if (googleUser == null) {
+        FullScreenLoader.hide();
+        return;
+      }
 
       final googleAuth = await googleUser.authentication;
 
@@ -80,26 +85,38 @@ extension SocialTypeExtension on SocialType {
           await FirebaseAuth.instance.signInWithCredential(credential);
       final user = userCredential.user;
 
-      if (user == null) return;
+      if (user == null) {
+        FullScreenLoader.hide();
+        return;
+      }
 
       final uid = user.uid;
-
       final doc =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
 
-      late String firstName;
-      late String lastName;
+      String firstName = '';
+      String lastName = '';
       String email = user.email ?? '';
       String phone = '';
+      String birthDay = '';
+      String gender = '';
+      String country = '';
+      String address = '';
+      String countryCode = '';
 
       if (doc.exists) {
         final data = doc.data()!;
         firstName = data['firstName'] ?? '';
         lastName = data['lastName'] ?? '';
-        phone = data['phone'] ?? '';
         email = data['email'] ?? '';
+        phone = data['phone'] ?? '';
+        birthDay = data['birthDay'] ?? '';
+        gender = data['gender'] ?? '';
+        country = data['country'] ?? '';
+        address = data['address'] ?? '';
+        countryCode = data['countryCode'] ?? '';
       } else {
-        // Nếu là user mới
+        // Tạo user mới nếu chưa tồn tại
         final name = user.displayName ?? '';
         firstName = name.split(' ').last;
         lastName = name.split(' ').length > 1
@@ -111,6 +128,11 @@ extension SocialTypeExtension on SocialType {
           'firstName': firstName,
           'lastName': lastName,
           'phone': '',
+          'birthDay': '',
+          'gender': '',
+          'country': '',
+          'address': '',
+          'countryCode': '',
           'createdAt': FieldValue.serverTimestamp(),
         });
       }
@@ -121,6 +143,11 @@ extension SocialTypeExtension on SocialType {
         firstName: firstName,
         lastName: lastName,
         phone: phone,
+        birthDay: birthDay,
+        gender: gender,
+        country: country,
+        address: address,
+        countryCode: countryCode,
       );
 
       await PreferencesManager.saveUser(userModel);
@@ -130,17 +157,19 @@ extension SocialTypeExtension on SocialType {
               name: '$lastName $firstName',
               email: email,
               phone: phone,
-              birth: '06/01/2003',
-              gender: 'Male',
-              country: 'Vietnam',
-              address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-              countryCode: 'VN',
+              birth: birthDay,
+              gender: gender,
+              country: country,
+              address: address,
+              countryCode: countryCode,
             ));
 
+        FullScreenLoader.hide();
         context.go('/');
       }
     } catch (e) {
       print('❌ Google login error: $e');
+      FullScreenLoader.hide();
     }
   }
 }

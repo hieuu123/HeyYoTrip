@@ -83,14 +83,17 @@ class AccountOptions extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16.0),
       child: Row(
         children: [
-          SvgPicture.asset(icon),
+          GestureDetector(onTap: onTap, child: SvgPicture.asset(icon)),
           const SizedBox(
             width: 10,
           ),
           Expanded(
-              child: BodyText(
-            text: title,
-            color: color,
+              child: GestureDetector(
+            onTap: onTap,
+            child: BodyText(
+              text: title,
+              color: color,
+            ),
           )),
           IconButton(
               onPressed: onTap,

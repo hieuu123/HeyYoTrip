@@ -7,6 +7,8 @@ class ProfileState {
   final String country;
   final String address;
   final String countryCode;
+  final String? message;
+  final bool? isSuccess;
 
   ProfileState({
     required this.name,
@@ -17,18 +19,22 @@ class ProfileState {
     required this.country,
     required this.address,
     required this.countryCode,
+    this.message,
+    this.isSuccess,
   });
 
   factory ProfileState.initial() {
     return ProfileState(
-      name: 'Nguyen Trong Hieu',
-      email: 'tronghieu@gmail.com',
-      phone: '0987654321',
-      birth: '06/01/2003',
-      gender: 'Male',
-      country: 'Vietnam',
-      address: 'Buon Ma Thuot, Dak Lak, Vietnam',
-      countryCode: 'VN',
+      name: '',
+      email: '',
+      phone: '',
+      birth: '',
+      gender: '',
+      country: '',
+      address: '',
+      countryCode: '',
+      message: null,
+      isSuccess: null,
     );
   }
 
@@ -41,6 +47,8 @@ class ProfileState {
     String? country,
     String? address,
     String? countryCode,
+    String? message,
+    bool? isSuccess,
   }) {
     return ProfileState(
       name: name ?? this.name,
@@ -51,6 +59,8 @@ class ProfileState {
       country: country ?? this.country,
       address: address ?? this.address,
       countryCode: countryCode ?? this.countryCode,
+      message: message,
+      isSuccess: isSuccess,
     );
   }
 }

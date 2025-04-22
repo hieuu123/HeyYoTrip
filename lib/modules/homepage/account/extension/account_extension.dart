@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_bloc.dart';
 import 'package:heyyo_trip/blocs/auth/auth_event.dart';
+import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 import 'package:heyyo_trip/modules/homepage/account/enum/account_enum.dart';
 import 'package:go_router/go_router.dart';
 
@@ -106,6 +107,7 @@ extension AccountOptionExtension on AccountOption {
         return () => GoRouter.of(context).push('/settings');
       case AccountOption.logout:
         return () {
+          FullScreenLoader.show(context);
           context.read<AuthBloc>().add(LogoutEvent());
           GoRouter.of(context).go('/login');
         };

@@ -23,3 +23,16 @@ class UpdateProfile extends ProfileEvent {
 }
 
 class LoadProfileFromFirestore extends ProfileEvent {}
+
+class ShowUpdateProfileMessage extends ProfileEvent {
+  final String message;
+  final bool isSuccess;
+
+  ShowUpdateProfileMessage({
+    required this.message,
+    required this.isSuccess,
+  });
+}
+
+class ClearProfileMessage extends ProfileEvent {}
+
