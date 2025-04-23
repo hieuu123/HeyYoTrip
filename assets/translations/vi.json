@@ -1,0 +1,20 @@
+{
+  "language.english": "Tiếng Anh",
+  "language.vietnamese": "Tiếng Việt",
+
+  "account": {
+    "profile": "Hồ sơ",
+    "maps": "Bản đồ",
+    "points": "Điểm của tôi",
+    "promotion_code": "Mã khuyến mãi",
+    "language": "Ngôn ngữ",
+    "currency": "Tiền tệ",
+    "contact_us": "Liên hệ",
+    "help_center": "Trung tâm trợ giúp",
+    "privacy_policy": "Chính sách bảo mật",
+    "terms": "Điều khoản",
+    "about": "Về chúng tôi",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất"
+  }
+}

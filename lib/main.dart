@@ -9,14 +9,17 @@ import 'package:heyyo_trip/modules/homepage/bookings/blocs/bookings_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/home/blocs/home_state.dart';
 import 'package:heyyo_trip/config/router.dart';
+import 'package:heyyo_trip/modules/homepage/language/blocs/language_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_bloc.dart';
 import 'package:heyyo_trip/modules/homepage/profile/blocs/profile_event.dart';
 import 'package:heyyo_trip/modules/hotel/search/blocs/search_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -24,10 +27,14 @@ void main() async {
   final user = await PreferencesManager.getUser();
   final isLoggedIn = FirebaseAuth.instance.currentUser != null && user != null;
 
-  runApp(MyApp(
-    isLoggedIn: isLoggedIn,
-    user: user,
-  ));
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('vi')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: MyApp(isLoggedIn: isLoggedIn, user: user),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -46,6 +53,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => BottomNavBloc()),
         BlocProvider(create: (context) => CategoryBloc()),
         BlocProvider(create: (context) => FlightSearchBloc()),
+        BlocProvider(create: (context) => LanguageBloc()),
         BlocProvider(
           create: (context) => ProfileBloc()
             ..add(
@@ -71,6 +79,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: router,
+        locale: context.locale,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
         builder: (context, child) {
           return Material(
             child: BlocBuilder<BottomNavBloc, BottomNavState>(

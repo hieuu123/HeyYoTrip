@@ -295,7 +295,7 @@ class EditInformationField extends StatelessWidget {
                 );
                 if (selectedDate != null) {
                   controller.text =
-                      DateFormat('dd/MM/yyyy').format(selectedDate);
+                      DateFormat('dd/MM/yyyy', 'en_US').format(selectedDate);
                   formState
                       .didChange(controller.text); // cập nhật state validator
                 }
@@ -341,7 +341,7 @@ class EditInformationField extends StatelessWidget {
                           );
                           if (selectedDate != null) {
                             controller.text =
-                                DateFormat('dd/MM/yyyy').format(selectedDate);
+                                DateFormat('dd/MM/yyyy', 'en_US').format(selectedDate);
                             formState.didChange(controller.text);
                           }
                         },

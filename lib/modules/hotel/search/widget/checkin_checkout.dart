@@ -23,7 +23,7 @@ class CheckInCheckOutSummary extends StatelessWidget {
         : 0;
 
     String formatDate(DateTime? date) {
-      return date != null ? DateFormat('EEE, dd yyyy').format(date) : '--';
+      return date != null ? DateFormat('EEE, dd yyyy', 'en_US').format(date) : '--';
     }
 
     return Column(
