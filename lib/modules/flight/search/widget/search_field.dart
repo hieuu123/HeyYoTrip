@@ -38,11 +38,11 @@ class SearchFieldState extends State<SearchField> {
     return BlocBuilder<FlightDateBloc, FlightDateState>(
         builder: (context, state) {
       final checkInText = state.checkIn != null
-          ? DateFormat('MMM dd, yyyy').format(state.checkIn!)
+          ? DateFormat('MMM dd, yyyy', 'en_US').format(state.checkIn!)
           : 'Select date';
 
       final checkOutText = state.checkOut != null
-          ? DateFormat('MMM dd, yyyy').format(state.checkOut!)
+          ? DateFormat('MMM dd, yyyy', 'en_US').format(state.checkOut!)
           : 'Select date';
 
       final maxWidth = MediaQuery.of(context).size.width;

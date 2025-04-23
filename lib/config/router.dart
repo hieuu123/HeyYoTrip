@@ -7,6 +7,7 @@ import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_details
 import 'package:heyyo_trip/modules/homepage/help_center/view/help_center_screen.dart';
 import 'package:heyyo_trip/modules/homepage/hot_deals/view/promotion_code_details.dart';
 import 'package:heyyo_trip/modules/homepage/hot_deals/view/special_campaign_details.dart';
+import 'package:heyyo_trip/modules/homepage/language/view/language_screen.dart';
 import 'package:heyyo_trip/modules/homepage/login/view/login_screen.dart';
 import 'package:heyyo_trip/modules/homepage/login/view/signup_screen.dart';
 import 'package:heyyo_trip/modules/homepage/main/view/main_screen.dart';
@@ -107,6 +108,12 @@ GoRouter buildRouter({required String initialLocation}) {
         builder: (context, state) => const MapScreen(),
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: MapScreen()),
+      ),
+      GoRoute(
+        path: '/language',
+        builder: (context, state) => const LanguageScreen(),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: LanguageScreen()),
       ),
       GoRoute(
         path: '/promotion-details',

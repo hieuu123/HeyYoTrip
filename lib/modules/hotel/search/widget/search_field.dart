@@ -15,11 +15,11 @@ class SearchField extends StatelessWidget {
     return BlocBuilder<SearchDateBloc, SearchDateState>(
         builder: (context, state) {
       final checkInText = state.checkIn != null
-          ? DateFormat('MMM dd, yyyy').format(state.checkIn!)
+          ? DateFormat('MMM dd, yyyy', 'en_US').format(state.checkIn!)
           : 'Select date';
 
       final checkOutText = state.checkOut != null
-          ? DateFormat('MMM dd, yyyy').format(state.checkOut!)
+          ? DateFormat('MMM dd, yyyy', 'en_US').format(state.checkOut!)
           : 'Select date';
 
       final maxWidth = MediaQuery.of(context).size.width;

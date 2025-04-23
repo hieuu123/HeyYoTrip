@@ -1,0 +1,20 @@
+{
+  "language.english": "English",
+  "language.vietnamese": "Vietnamse",
+
+  "account": {
+    "profile": "Profile",
+    "maps": "Maps",
+    "points": "My points",
+    "promotion_code": "My promotion code",
+    "language": "Language",
+    "currency": "Currency",
+    "contact_us": "Contact us",
+    "help_center": "Help center",
+    "privacy_policy": "Privacy policy",
+    "terms": "Terms and conditions",
+    "about": "About us",
+    "settings": "Settings",
+    "logout": "Log out"
+  }
+}

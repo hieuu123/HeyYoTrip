@@ -9,7 +9,6 @@ class Tab2 extends StatelessWidget {
   const Tab2({super.key});
 
   @override
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HotDealsCategoryBloc(),

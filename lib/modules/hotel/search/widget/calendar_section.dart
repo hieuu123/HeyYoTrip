@@ -97,7 +97,7 @@ class CalendarMonthView extends StatelessWidget {
         child: Column(
           children: [
             SubHeadingText(
-              text: DateFormat.yMMMM().format(month),
+              text: DateFormat.yMMMM('en_US').format(month),
               color: const Color(0xFF333333),
             ),
             const SizedBox(height: 25),

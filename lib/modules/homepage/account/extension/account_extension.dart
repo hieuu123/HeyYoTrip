@@ -5,6 +5,7 @@ import 'package:heyyo_trip/blocs/auth/auth_event.dart';
 import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 import 'package:heyyo_trip/modules/homepage/account/enum/account_enum.dart';
 import 'package:go_router/go_router.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 extension AccountOptionExtension on AccountOption {
   String get icon {
@@ -38,36 +39,69 @@ extension AccountOptionExtension on AccountOption {
     }
   }
 
-  String get title {
+  String get titleKey {
     switch (this) {
       case AccountOption.profile:
-        return 'Profile';
+        return 'account.profile';
       case AccountOption.maps:
-        return 'Maps';
+        return 'account.maps';
       case AccountOption.points:
-        return 'My points';
+        return 'account.points';
       case AccountOption.promotionCode:
-        return 'My promotion code';
+        return 'account.promotion_code';
       case AccountOption.language:
-        return 'Language';
+        return 'account.language';
       case AccountOption.currency:
-        return 'Currency';
+        return 'account.currency';
       case AccountOption.contactUs:
-        return 'Contact us';
+        return 'account.contact_us';
       case AccountOption.helpCenter:
-        return 'Help Center';
+        return 'account.help_center';
       case AccountOption.privacyPolicy:
-        return 'Privacy policy';
+        return 'account.privacy_policy';
       case AccountOption.terms:
-        return 'Term and conditions';
+        return 'account.terms';
       case AccountOption.about:
-        return 'About us';
+        return 'account.about';
       case AccountOption.settings:
-        return 'Setting';
+        return 'account.settings';
       case AccountOption.logout:
-        return 'Log out';
+        return 'account.logout';
     }
   }
+
+   String get title => titleKey.tr();
+
+  // String get title {
+  //   switch (this) {
+  //     case AccountOption.profile:
+  //       return 'Profile';
+  //     case AccountOption.maps:
+  //       return 'Maps';
+  //     case AccountOption.points:
+  //       return 'My points';
+  //     case AccountOption.promotionCode:
+  //       return 'My promotion code';
+  //     case AccountOption.language:
+  //       return 'Language';
+  //     case AccountOption.currency:
+  //       return 'Currency';
+  //     case AccountOption.contactUs:
+  //       return 'Contact us';
+  //     case AccountOption.helpCenter:
+  //       return 'Help Center';
+  //     case AccountOption.privacyPolicy:
+  //       return 'Privacy policy';
+  //     case AccountOption.terms:
+  //       return 'Term and conditions';
+  //     case AccountOption.about:
+  //       return 'About us';
+  //     case AccountOption.settings:
+  //       return 'Setting';
+  //     case AccountOption.logout:
+  //       return 'Log out';
+  //   }
+  // }
 
   Color get color {
     return this == AccountOption.logout
