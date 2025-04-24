@@ -23,4 +23,14 @@ class PreferencesManager {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userKey);
   }
+
+  static Future<void> setLocale(String code) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('locale', code);
+  }
+
+  static Future<String?> getLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('locale');
+  }
 }

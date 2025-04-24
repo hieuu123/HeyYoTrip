@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "languageEnglish": "English",
+  "languageVietnamese": "Vietnamese",
+  "selectDate": "Select date",
+
+  "accountProfile": "Profile",
+  "accountMaps": "Maps",
+  "accountPoints": "My points",
+  "accountPromotionCode": "My promotion code",
+  "accountLanguage": "Language",
+  "accountCurrency": "Currency",
+  "accountContactUs": "Contact us",
+  "accountHelpCenter": "Help center",
+  "accountPrivacyPolicy": "Privacy policy",
+  "accountTerms": "Terms and conditions",
+  "accountAbout": "About us",
+  "accountSettings": "Settings",
+  "accountLogout": "Log out"
+}
