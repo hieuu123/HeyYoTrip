@@ -5,6 +5,7 @@ import 'package:heyyo_trip/blocs/auth/auth_event.dart';
 import 'package:heyyo_trip/common/widget/fullscreen_loader.dart';
 import 'package:heyyo_trip/modules/homepage/account/enum/account_enum.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension AccountOptionExtension on AccountOption {
   String get icon {
@@ -38,34 +39,35 @@ extension AccountOptionExtension on AccountOption {
     }
   }
 
-  String get title {
+  String title(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case AccountOption.profile:
-        return 'Profile';
+        return l10n.accountProfile;
       case AccountOption.maps:
-        return 'Maps';
+        return l10n.accountMaps;
       case AccountOption.points:
-        return 'My points';
+        return l10n.accountPoints;
       case AccountOption.promotionCode:
-        return 'My promotion code';
+        return l10n.accountPromotionCode;
       case AccountOption.language:
-        return 'Language';
+        return l10n.accountLanguage;
       case AccountOption.currency:
-        return 'Currency';
+        return l10n.accountCurrency;
       case AccountOption.contactUs:
-        return 'Contact us';
+        return l10n.accountContactUs;
       case AccountOption.helpCenter:
-        return 'Help Center';
+        return l10n.accountHelpCenter;
       case AccountOption.privacyPolicy:
-        return 'Privacy policy';
+        return l10n.accountPrivacyPolicy;
       case AccountOption.terms:
-        return 'Term and conditions';
+        return l10n.accountTerms;
       case AccountOption.about:
-        return 'About us';
+        return l10n.accountAbout;
       case AccountOption.settings:
-        return 'Setting';
+        return l10n.accountSettings;
       case AccountOption.logout:
-        return 'Log out';
+        return l10n.accountLogout;
     }
   }
 

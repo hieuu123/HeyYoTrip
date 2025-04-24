@@ -32,7 +32,7 @@ class AccountScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 12.0),
                             child: AccountOptions(
                               icon: option.icon,
-                              title: option.title,
+                              title: option.title(context),
                               color: option.color,
                               onTap: option.onTap(context),
                             ),
